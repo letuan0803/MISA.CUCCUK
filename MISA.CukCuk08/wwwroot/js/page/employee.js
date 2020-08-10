@@ -3,11 +3,11 @@ var FormMode
 // Mã nhân viên lớn nhất
 var maxEmployeeCode
 // Số trang hiện tại
-var currentPage
+var currentPage = 10
 // Tổng số bản ghi
 var totalRecord
 // Số bản ghi mỗi trang
-var recordPerPage
+var recordPerPage = 100
 
 $(document).ready(function () {
     //load dữ liệu
@@ -48,12 +48,13 @@ class EmployeeJS {
         // Khi ấn vào 1 dòng trong table
         $("table").on("click", "tbody tr", this.rowOnClick);
 
-        // Khi ấn các thao tác chuyển trang
-        $("#firstPage").on("click", pagination.firstPage)
-        $("#prevPage").on("click", pagination.prevPage)
-        $("#nextPage").on("click", pagination.nextPage)
-        $("#lastPage").on("click", pagination.lastPage)
-        $("#refresh").on("click", this.loadData)
+
+
+        // Khi ấn nút chọn page số bao nhiêu
+        $('#recordPerPage').on('change', this.loadData);
+
+        // Khi ấn nút chọn số row trong 1 page
+        $('#inpPage').on('change', this.loadData);
 
         // Khi ấn nút Yes trên warning-box
         $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteStaff.bind(this));
@@ -70,6 +71,14 @@ class EmployeeJS {
 
         // Sự kiện khi upload file
         $("#fileImage").on('change', this.showImageFromInput);
+
+        // Khi ấn các thao tác chuyển page
+        $('#btnFirstPage').on('click', this.btnFirstPageOnClick.bind(this));
+        $('#btnPrePage').on('click', this.btnPrePageOnClick.bind(this));
+        $('#btnNextPage').on('click', this.btnNextPageOnClick.bind(this));
+        $('#btnEndPage').on('click', this.btnEndPageOnClick.bind(this));
+        $("#refresh").on("click", this.loadData)
+
 
     }
 
@@ -239,7 +248,7 @@ class EmployeeJS {
                         $('#selectDepartment').val(res.department);
                         $('#txtEmployeeTaxCode').val(res.debitNumber);
                         $('#dtJoinDate').val(commonJS.formatDateToBind(new Date(res.createdDate)));
-                        $('#txtSalary').val(res.salary);
+                        $('#txtSalary').val(commonJS.formatMoney(res['salary']));
 
                         //Show dialog
                         $("#formDialogDetail").show();
@@ -359,15 +368,20 @@ class EmployeeJS {
         try {
             //làm trống table
             $('#tbListEmployee tbody').empty();
-            //khai báo mảng chứa data
+debugger
+            // Lấy số dòng trên một trang
+            currentPage = $("#inpPage").val();
+            // Lấy số trang hiện tại
+            recordPerPage = $("#recordPerPage").val();
             //gọi ajax lấy dữ liệu với phương thức get
             $.ajax({
-                url: "/api/v1/Employees",
+                url: "/api/v1/Employees/" + currentPage + "/" + recordPerPage,
                 method: "GET",
                 data: {},
                 dataType: "json",
                 contentType: "application/json",
             }).done(function (res) {
+
                 //Đọc dũ liệu và gen dữ liệu từng nhân viên vào html
                 $.each(res, function (index, item) {
                     var employeeInfoHTML = $(`<tr>
@@ -379,7 +393,7 @@ class EmployeeJS {
                                 <td>`+ item['email'] + `</td>
                                 <td>`+ item['position'] + `</td>
                                 <td>`+ item['department'] + `</td>
-                                <td>`+ item['salary'] + `</td>
+                                <td>`+ commonJS.formatMoney(item['salary']) + `</td>
                                 <td>`+ item['status'] + `</td>
                             </tr>`);
                     employeeInfoHTML.data("idCard", item.idCard);
@@ -392,6 +406,7 @@ class EmployeeJS {
 
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
                 });
+                me.updatePadding();
                 $("#btnDuplicate, #btnEdit, #btnDelete").prop('disabled', true);
             }).fail(function (res) {
             })
@@ -626,7 +641,7 @@ class EmployeeJS {
         // Reset lại dialog  chuẩn bị cho lần nhập sau
         this.resetDialog();
     }
-    
+
     /**
      * Sự kiện khi nhập vào các ô tìm kiếm
      * CreatedBy: LTTUAN(10/08/2020)
@@ -699,4 +714,92 @@ class EmployeeJS {
 
         })
     }
+
+
+
+    /**
+     * Hàm cập nhật sự thay đổi của phân trang
+    
+     */
+    updatePadding() {
+        //cập nhât tổng số bản ghi 
+        var totalRecord;
+
+        $.ajax({
+            url: "/totalRecord",
+            method: "GET",
+            async: false,
+            contentType: "application/json",
+        }).done(function (res) {
+            totalRecord = res;
+        }).fail(function (res) {
+            console.log("get totalRecord fail")
+        });
+
+        //cập nhập tổng số trang
+        var totalPage;
+        if (totalRecord % recordPerPage == 0) { totalPage = totalRecord / recordPerPage } else {
+            totalPage = Math.floor(totalRecord / recordPerPage + 1)
+        }
+        //cập nhật số thứ tự bản ghi đầu trang 
+        var firstRecordOfPage;
+        firstRecordOfPage = (recordPerPage * (currentPage - 1)) + 1;
+        //cập nhật số thứ tự bản ghi cuối trang
+        var lastRecordOfPage;
+        if (currentPage < totalPage) { lastRecordOfPage = (recordPerPage * currentPage) }
+        else {
+            lastRecordOfPage = totalRecord;
+        }
+        //cập nhật giá trị phân trang
+        $("#inpPage").val(currentPage);
+        $("#totalPage").text(totalPage);
+        $("#totalRecord").text(totalRecord);
+        $("#firstRecordOfPage").text(firstRecordOfPage);
+        $("#lastRecordOfPage").text(lastRecordOfPage);
+        $("#recordPerPage").val(recordPerPage);
+
+    }
+
+    /**
+    * Sự kiện khi ấn nút quay về page đầu tiên
+    * CreatedBy: LTTUAN (06/08/2020)
+    * */
+    btnFirstPageOnClick() {
+        $("#inpPage").val(1);
+        this.loadData();
+    }
+
+    /**
+     * Sự kiện khi ấn nút quay về page trước
+     * CreatedBy: LTTUAN (06/08/2020)
+     * */
+    btnPrePageOnClick() {
+        if ($('#inpPage').val() > 1) {
+            $("#inpPage").val(currentPage-1);
+            this.loadData();
+        }
+    }
+
+    /**
+     * Sự kiện khi ấn nút chuyển qua page tiếp
+     * CreatedBy: LTTUAN (06/08/2020)
+     * */
+    btnNextPageOnClick() {
+        debugger
+        if ($('#inpPage').val() < totalPage) {
+            $("#inpPage").val(currentPage+1);
+            this.loadData();
+        }
+    }
+
+    /**
+     * Sự kiện khi ấn nút chuyển qua page cuối cùng
+     * CreatedBy: LTTUAN (06/08/2020)
+     * */
+    btnEndPageOnClick() {
+        debugger
+            $("#inpPage").val(totalPage);
+            this.loadData();
+    }
+
 }

@@ -267,3 +267,8 @@ select:focus {
   position: absolute;
   right: 9px;
 }
+
+.currency {
+  position: absolute;
+  right: 8px;
+}

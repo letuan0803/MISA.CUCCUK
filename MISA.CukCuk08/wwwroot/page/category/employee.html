@@ -248,32 +248,30 @@
             </div>
             <div class="pag">
                 <span class="left">
-                    <img src="../../asset/images/grid/page-first.png" class="item" alt="" id="firstPage">
-                    <img src="../../asset/images/grid/page-prev.png" class="item" alt="" id="prevPage">
-                    <label for="inp-page" class="item">Trang</label>
-                    <input type="text" id="inp-page" class="item" value="1" style="width: 30px">
+                    <img src="../../asset/images/grid/page-first.png" class="item" alt="" id="btnFirstPage">
+                    <img src="../../asset/images/grid/page-prev.png" class="item" alt="" id="btnPrePage">
+                    <label for="inpPage" class="item">Trang</label>
+                    <input type="text" id="inpPage" class="item" value="1" style="width: 30px">
                     <span id="total-page" class="item">trên</span>
-                    <span id="totalPage">25</span>
-                    <img src="../../asset/images/grid/page-next.png" alt="" id="nextPage" class="item">
-                    <img src="../../asset/images/grid/page-last.png" alt="" id="lastPage" class="item">
+                    <span id="totalPage"></span>
+                    <img src="../../asset/images/grid/page-next.png" alt="" id="nextPage" class="btnNextPage">
+                    <img src="../../asset/images/grid/page-last.png" alt="" id="lastPage" class="btnEndPage">
                     <img src="../../asset/images/grid/refresh.png" alt="" id="refresh" class="item">
                     <span class="dropdown" class="item">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            100
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">125</a>
-                            <a class="dropdown-item" href="#">150</a>
-                            <a class="dropdown-item" href="#">200</a>
-                        </div>
+                        <select class="medium-input" name="cars" id="recordPerPage">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                        </select>
                     </span>
                 </span>
                 <span class="right float-right mr-2">
-                    <span>Hiển thị 1 - </span>
-                    <span>22</span>
+                    <span>Hiển thị</span>
+                    <span id=firstRecordOfPage></span>
+                    <span>-</span>
+                    <span id="lastRecordOfPage"></span>
                     <span>trên</span>
-                    <span>22</span>
+                    <span id = "totalRecord"></span>
                     <span>kết quả</span>
                 </span>
             </div>
@@ -438,6 +436,7 @@
                                 <div class="short-row-item ml-8p">
                                     <label for="txtSalary" class="right-label">Mức lương</label>
                                     <input class="medium-input" type="text" id="txtSalary" />
+                                    <i class="currency">(VNĐ)</i>
                                 </div>
                             </div>
                         </div>

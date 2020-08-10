@@ -52,6 +52,39 @@ namespace MISA.CukCuk.Controllers
         }
 
         /// <summary>
+        /// Hàm lấy  bản ghi theo trang hiện tại và số bản ghi trên mỗi trang
+        /// createdby: LTTUAN (10/08/2020)
+        /// </summary>
+        /// <param name="currentPage"></param>
+        /// <param name="recordPerPage"></param>
+        /// <returns></returns>
+        // GET api/user/firstname/lastname/address
+        [HttpGet("{currentPage}/{recordPerPage}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int currentPage, int recordPerPage)
+        {
+            var employee = await _context.Employee.Skip(recordPerPage*currentPage-1).Take(recordPerPage).ToListAsync();
+
+            return employee;
+        }
+
+        /// <summary>
+        /// Hàm lấy  tổng số bản ghi
+        /// createdby: LTTUAN (10/08/2020)
+        /// </summary>
+        /// <param name="currentPage"></param>
+        /// <param name="recordPerPage"></param>
+        /// <returns></returns>
+        // GET api/user/firstname/lastname/address
+        [HttpGet()]
+        [Route("/totalRecord")]
+        public int GetTotalRecord()
+        {
+            var totalRecord =  _context.Employee.Count();
+
+            return totalRecord;
+        }
+
+        /// <summary>
         /// hàm cập nhật nhân viên
         /// createdby: LTTUAN (10/08/2020)
         /// </summary>

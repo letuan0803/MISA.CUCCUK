@@ -70,4 +70,33 @@ var commonJS = {
     validatePhone(phoneNumber) {
         return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phoneNumber);
     },
+
+        /**
+     * Hàm trả về mã nhân viên lớn nhất + 1
+     * @param {any} maxCode
+     */
+    formatCode(maxCode) {
+        var tmp = (parseInt(maxCode.substr(2, 5)) + 1).toString();
+        while (tmp.length < 5) {
+            tmp = '0' + tmp;
+        }
+        return "NV" + tmp;
+    },
+    /**
+     * Hàm trả về tiền dưới dạng string để gửi dữ liệu DB
+     * @param {any} money
+     */
+    formatMoneyToBind(money) {
+        return money.replace(/[.]/g, "");
+    },
+
+    /**
+     * Hàm trả về link ảnh có thể bind được để hiển thị
+     * @param {any} imageLink
+     */
+    formatImageLink(imageLink) {
+        var startLink = imageLink.indexOf("\\content");
+        imageLink = imageLink.replace(/[\\]/g, "/");
+        return imageLink.substr(startLink, imageLink.length - 1);
+    }
 }

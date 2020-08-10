@@ -1,5 +1,13 @@
 var me = null
 var FormMode
+// Mã nhân viên lớn nhất
+var maxEmployeeCode
+// Số trang hiện tại
+var currentPage
+// Tổng số bản ghi
+var totalRecord
+// Số bản ghi mỗi trang
+var recordPerPage
 
 $(document).ready(function () {
     //load dữ liệu
@@ -37,15 +45,21 @@ class EmployeeJS {
         //Khi ấn nút cất
         $("#btnSave").click(this.saveData.bind(this));
 
-        // Khi ấn vào 1 thành phần ở trong table
+        // Khi ấn vào 1 dòng trong table
         $("table").on("click", "tbody tr", this.rowOnClick);
 
-        // Phần pagination
+        // Khi ấn các thao tác chuyển trang
         $("#firstPage").on("click", pagination.firstPage)
         $("#prevPage").on("click", pagination.prevPage)
         $("#nextPage").on("click", pagination.nextPage)
         $("#lastPage").on("click", pagination.lastPage)
         $("#refresh").on("click", this.loadData)
+
+        // Khi ấn nút Yes trên warning-box
+        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteStaff.bind(this));
+
+        // Khi ấn nút No trên warning-box
+        $('#btn-close-warning').on('click', 0, this.notDeleteStaff);
 
         // Phần fitler
         $("#tbListEmployee thead input").on("keydown", function (event) {
@@ -118,6 +132,8 @@ class EmployeeJS {
         $("#formDialogDetail").show();
         // Focus vào ô input đầu tiên của dialog
         $('#txtEmployeeCode').focus();
+        // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1
+        $('#txtStaffCode').val(commonJS.formatCode(maxCode));
     }
 
     /**
@@ -246,9 +262,34 @@ class EmployeeJS {
      * @author: LTTUAN (29/07/2020)
      */
     btnDeleteOnClick(sender) {
-        console.log("EmployeeJS -> btnDeleteOnClick -> btnDeleteOnClick")
-
         try {
+            //action = hành động xóa
+            // action = sender.data;
+            // Nếu tìm thấy row có class là row-selected
+            if ($('.row-selected').length !== 0) {
+                //// Gán tên nhân viên vào warning-box
+                //$('#staff-name').html($('.row-selected').find('td:eq(1)').text());
+
+                // Show ra warning-box
+                $('#warning-box').show();
+            }
+            debugger
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Khi ấn nút đóng đồng ý xóa
+     * CreatedBy: LTTUAN (10/08/2020)
+     * @param {any} sender
+     */
+    deleteStaff(sender) {
+        try {
+
+            // Đóng cửa số warning-box
+            $('#warning-box').hide();
+
             //Nếu thấy row có class là row-selected
             if ($(".row-selected").length !== 0) {
                 debugger
@@ -276,7 +317,21 @@ class EmployeeJS {
         } catch (e) {
             console.log(e);
         }
+    }
 
+    /**
+     * Khi ấn nút đóng warning
+     * CreatedBy: LTTUAN (10/08/2020)
+     * @param {any} sender
+     */
+    notDeleteStaff(sender) {
+        try {
+            // Ẩn ra warning-box
+            $('#warning-box').hide();
+            me.loadData();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -356,7 +411,7 @@ class EmployeeJS {
 
         debugger
         try {
-            //Khởi tạo các biến để lấy dữ liệu phòng TH null
+            //Khởi tạo các biến 
             var employeeCode = "",
                 employeeName = "",
                 birthday = "",
@@ -571,7 +626,11 @@ class EmployeeJS {
         // Reset lại dialog  chuẩn bị cho lần nhập sau
         this.resetDialog();
     }
-
+    
+    /**
+     * Sự kiện khi nhập vào các ô tìm kiếm
+     * CreatedBy: LTTUAN(10/08/2020)
+     */
     filter() {
         console.log("input keydown")
 

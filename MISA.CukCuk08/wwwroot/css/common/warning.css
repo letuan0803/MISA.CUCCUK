@@ -1,0 +1,123 @@
+#warning-box {
+    position: absolute;
+    display: none;
+}
+
+.warning-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    opacity: .4;
+}
+
+
+.warning {
+    position: fixed;
+    width: 460px;
+    height: 109px;
+    background-color: #ffffff;
+    top: calc(50% - 126px);
+    left: calc(50% - 145px);
+    border-radius: 5px;
+    border: 5px solid #0072bc;
+}
+
+    .warning .warning-titlebar {
+        color: #ffffff;
+        width: 100%;
+        background-color: #0072bc;
+        height: 30px;
+    }
+
+        .warning .warning-titlebar .title {
+            float: left;
+            line-height: 25px;
+            padding-left: 4px;
+        }
+
+        .warning .warning-titlebar .btn-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-image: url("/asset/images/close-icon.png");
+        }
+
+    .warning .warning-body {
+        width: 100%;
+    }
+
+#warning .warning-body .content-warning {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.warning .warning-body .content-warning h2 {
+    position: absolute;
+    top: 33%;
+    right: -4%;
+    width: 100%;
+    font-weight: 200;
+    height: 20%;
+}
+
+.warning .content-warning {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+}
+
+.warning .button-group {
+    float: right;
+    display: flex;
+    height: 25px;
+    margin-right: 4%;
+    margin-top: -1%;
+}
+
+    .warning .button-group button {
+        height: 25px;
+        width: 70px;
+        border: 1px solid;
+        border-color: #ccc;
+        border-color: #ccc;
+        background-color: #E8E8E8;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .warning .button-group button:focus {
+            outline: none;
+            border-color: #608089 !important;
+        }
+
+    .warning .button-group #btn-yes-warning {
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .warning .button-group #btn-close-warning {
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+.warning .content-warning .icon {
+    background-image: url('/asset/images/icons8-question-mark-32.png');
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 34px;
+    position: absolute;
+    top: 33%;
+    left: 4%;
+}

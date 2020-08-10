@@ -1,0 +1,114 @@
+button .btn-icon {
+  width: 16px;
+  height: 16px;
+  background-image: url("/content/images/iconsprite.png");
+  cursor: pointer;
+
+  .btn-icon-add {
+    background-position: -1px -2416px;
+  }
+
+  .btn-icon-duplicate {
+    background-position: -1px -1888px;
+  }
+
+  .btn-icon-edit {
+    background-position: 0 -1872px;
+  }
+
+  .btn-icon-delete {
+    background-position: -1px -2048px;
+  }
+
+  .btn-icon-refresh {
+    background-position: 0 -2586px;
+  }
+
+  .btn-icon-import {
+    background-image: url("/asset/images/import16.png");
+  }
+
+  .btn-icon-export {
+    background-image: url("/asset/images/excel_97_24.png");
+  }
+
+  .btn-icon-group-customer {
+    background-image: url("/asset/images/ic_gopkhachhang.png");
+    background-repeat: no-repeat;
+  }
+
+  .btn-icon-help {
+    background-image: url("/asset/images/icons8-help-17.png");
+    background-repeat: no-repeat;
+    background-position: 0px -1px;
+  }
+}
+
+.btn {
+  border: 1px solid #d9d9d9;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #c7d5d9;
+}
+
+button .btn-text {
+  margin-left: 4px;
+}
+
+#btnImport {
+  border-left: 2px ridge;
+}
+
+#btnGroupCustomer {
+  border-left: 2px ridge;
+  border-right: 2px ridge;
+}
+
+.btnBackToDefault {
+  position: absolute;
+  top: 21px;
+  right: 110px;
+  padding: 4px 10px 4px 10px;
+}
+
+.btnResponse {
+  position: absolute;
+  top: 21px;
+  right: 9px;
+  padding: 4px 10px 4px 30px;
+  background-image: url("/asset/images/viewemail.png");
+  background-repeat: no-repeat;
+  background-position: 10px 3px;
+}
+
+#btnSave {
+  padding: 5px 15px 5px 35px;
+  background-image: url("/asset/images/save16.png");
+  background-repeat: no-repeat;
+  background-position: 10px 7px;
+}
+
+#btnSaveAdd {
+  padding: 5px 15px 5px 35px;
+  background-image: url("/asset/images/saveadd16.png");
+  background-repeat: no-repeat;
+  background-position: 13px 6px;
+  margin: 0px 5px 0px 5px;
+}
+
+#btnClose {
+  padding: 5px 15px 5px 35px;
+  background-image: url("/asset/images/disable16.png");
+  background-repeat: no-repeat;
+  background-position: 13px 7px;
+}
+
+#btnHelp {
+  padding: 5px 15px 5px 35px;
+  background-image: url("/asset/images/icons8-help-17.png");
+  background-repeat: no-repeat;
+  background-position: 13px 6px;
+}

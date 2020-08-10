@@ -1,0 +1,202 @@
+#content {
+  margin-left: 10px;
+  width: 100%;
+}
+
+#content .header {
+  width: 100%;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#content .header .left {
+  background-color: #fff !important;
+}
+
+#content .header .left .big-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#content .header .left i {
+  color: #0199fc;
+}
+
+#content .header .left .small-text {
+  color: #0199fc;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#content .header .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#content .header .right .back, #content .header .right .feedback {
+  border: 1px solid #000;
+}
+
+#content .toolbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(100% - 4px);
+  height: 25px;
+  border: 1px solid #ccc;
+  padding: 2px;
+  background: #ededed;
+}
+
+#content .toolbar button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  border-radius: unset;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  padding: 0 6px;
+}
+
+#content .toolbar button .btn-icon {
+  width: 16px;
+  height: 16px;
+  background-image: url("/asset/images/iconsprite.png");
+}
+
+#content .toolbar button .btn-icon-add {
+  background-position: -1px -2416px;
+}
+
+#content .toolbar button .btn-icon-duplicate {
+  background-position: -1px -1888px;
+}
+
+#content .toolbar button .btn-icon-edit {
+  background-position: 0 -1872px;
+}
+
+#content .toolbar button .btn-icon-delete {
+  background-position: -1px -2048px;
+}
+
+#content .toolbar button .btn-icon-refresh {
+  background-position: 0 -2586px;
+}
+
+#content .toolbar button .btn-icon-import {
+  background-image: url("/asset/images/import16.png");
+  background-repeat: no-repeat;
+}
+
+#content .toolbar button .btn-icon-export {
+  background-image: url("/asset/images/excel_97_24.png");
+  background-repeat: no-repeat;
+}
+
+#content .toolbar button .btn-icon-group-customer {
+  background-image: url("/asset/images/ic_gopkhachhang.png");
+  background-repeat: no-repeat;
+}
+
+#content .toolbar button .btn-icon-help {
+  background-image: url("/asset/images/icons8-help-17.png");
+  background-repeat: no-repeat;
+  background-position: 0px -1px;
+}
+
+#content .toolbar button .btn-text {
+  margin-left: 4px;
+}
+
+#content .toolbar button:hover {
+  border-color: #1e32d0;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+#content .grid {
+  width: 100%;
+  height: calc(100% - 28px);
+  border: 1px solid #ccc;
+  border-top: none;
+  overflow: scroll;
+}
+
+#content .grid table {
+  width: 100%;
+  border-color: #ccc;
+}
+
+#content .grid table thead {
+  border-top: none;
+  background: #ededed;
+}
+
+#content .grid table thead tr th {
+  font-weight: normal;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid #ccc;
+  height: 40px;
+}
+
+#content .grid table thead tr th div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#content .grid table thead tr th input {
+  width: 100%;
+  height: 25px;
+}
+
+#content .grid table thead tr th .icon {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+#content .grid table tbody .row-selected {
+  background-color: #0873b9;
+}
+
+#content .grid table tbody tr td {
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+}
+
+#content .grid table tbody tr:hover {
+  background-color: #bfd1fe;
+  cursor: pointer;
+}
+/*# sourceMappingURL=content.css.map */

@@ -1,0 +1,173 @@
+$primary-color: #0873b9;
+$sub-color: #005185;
+$selected-color: #0199fc;
+$content-color: #ededed;
+$boder-color: rgb(173, 172, 172);
+
+#content {
+  margin-left: 10px;
+  width: 100%;
+  .header {
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      background-color: #fff !important;
+      .big-text {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      i {
+        color: $selected-color;
+      }
+      .small-text {
+        color: $selected-color;
+        align-items: center;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      .back {
+        border: 1px solid #000;
+      }
+      .feedback {
+        @extend .back;
+      }
+    }
+  }
+
+  .toolbar {
+    display: flex;
+    width: calc(100% - 4px);
+    height: 25px;
+    border: 1px solid #ccc;
+    padding: 2px;
+    background: #ededed;
+
+    button {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      border-radius: unset;
+      border-style: solid;
+      border-width: 1px;
+      border-color: transparent;
+      padding: 0 6px;
+
+      .btn-icon {
+        width: 16px;
+        height: 16px;
+        background-image: url("/asset/images/iconsprite.png");
+      }
+      .btn-icon-add {
+        background-position: -1px -2416px;
+      }
+      .btn-icon-duplicate {
+        background-position: -1px -1888px;
+      }
+      .btn-icon-edit {
+        background-position: 0 -1872px;
+      }
+      .btn-icon-delete {
+        background-position: -1px -2048px;
+      }
+      .btn-icon-refresh {
+        background-position: 0 -2586px;
+      }
+      .btn-icon-import {
+        background-image: url("/asset/images/import16.png");
+        background-repeat: no-repeat;
+      }
+
+      .btn-icon-export {
+        background-image: url("/asset/images/excel_97_24.png");
+        background-repeat: no-repeat;
+      }
+
+      .btn-icon-group-customer {
+        background-image: url("/asset/images/ic_gopkhachhang.png");
+        background-repeat: no-repeat;
+      }
+
+      .btn-icon-help {
+        background-image: url("/asset/images/icons8-help-17.png");
+        background-repeat: no-repeat;
+        background-position: 0px -1px;
+      }
+      .btn-text {
+        margin-left: 4px;
+      }
+    }
+    button:hover {
+      border-color: #1e32d0;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .grid {
+    width: 100%;
+    height: calc(100% - 28px);
+    border: 1px solid #ccc;
+    border-top: none;
+
+    overflow: scroll;
+
+    table {
+      width: 100%;
+      border-color: #ccc;
+      thead {
+        border-top: none;
+        background: #ededed;
+
+        tr {
+          th {
+            font-weight: normal;
+            font-size: 13px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 40px;
+
+            div {
+              display: flex;
+            }
+            input {
+              width: 100%;
+              height: 25px;
+            }
+            .icon {
+              width: 25px;
+              height: 25px;
+              border: 1px solid black;
+
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      tbody {
+        .row-selected {
+          background-color: #0873b9;
+        }
+        tr {
+          td {
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+          }
+        }
+        tr:hover {
+          background-color: #bfd1fe;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

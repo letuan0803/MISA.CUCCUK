@@ -1,0 +1,67 @@
+$primary-color: #0873b9;
+$sub-color: #005185;
+$selected-color: #0199fc;
+
+#left-menu {
+  background-color: $primary-color;
+
+  .menu-item {
+    display: flex;
+
+    width: calc(100% - 18px);
+    height: 40px;
+    padding-left: 18px;
+
+    align-items: center;
+
+    border-top: 1px solid #178ad6;
+    border-bottom: 1px solid #03578e;
+
+    cursor: pointer;
+
+    .menu-item-icon {
+      width: 20px;
+      height: 20px;
+
+      background-image: url("/asset/images/iconMenu.png");
+    }
+
+    .menu-item-text {
+      color: #fff;
+      margin-left: 10px;
+      line-height: 40px;
+    }
+
+    /*Icon position*/
+    .icon-home {
+      background-position: -5px -5px;
+    }
+
+    .icon-report {
+      background-position: -3px -194px;
+    }
+
+    .icon-sale {
+      background-position: -7px -81px;
+    }
+
+    .icon-directory {
+      background-position: -3px -160px;
+    }
+
+    .icon-money {
+      background-position: -3px -81px;
+    }
+
+    .icon-discount {
+      background-position: -3px -117px;
+    }
+
+    .icon-report {
+      background-position: -3px -194px;
+    }
+  }
+  .menu-item:hover {
+    background-color: #eb7728;
+  }
+}

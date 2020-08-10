@@ -1,0 +1,64 @@
+#left-menu {
+  background-color: #0873b9;
+}
+
+#left-menu .menu-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(100% - 18px);
+  height: 40px;
+  padding-left: 18px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 1px solid #178ad6;
+  border-bottom: 1px solid #03578e;
+  cursor: pointer;
+  /*Icon position*/
+}
+
+#left-menu .menu-item .menu-item-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("/asset/images/iconMenu.png");
+}
+
+#left-menu .menu-item .menu-item-text {
+  color: #fff;
+  margin-left: 10px;
+  line-height: 40px;
+}
+
+#left-menu .menu-item .icon-home {
+  background-position: -5px -5px;
+}
+
+#left-menu .menu-item .icon-report {
+  background-position: -3px -194px;
+}
+
+#left-menu .menu-item .icon-sale {
+  background-position: -7px -81px;
+}
+
+#left-menu .menu-item .icon-directory {
+  background-position: -3px -160px;
+}
+
+#left-menu .menu-item .icon-money {
+  background-position: -3px -81px;
+}
+
+#left-menu .menu-item .icon-discount {
+  background-position: -3px -117px;
+}
+
+#left-menu .menu-item .icon-report {
+  background-position: -3px -194px;
+}
+
+#left-menu .menu-item:hover {
+  background-color: #eb7728;
+}
+/*# sourceMappingURL=left-menu.css.map */

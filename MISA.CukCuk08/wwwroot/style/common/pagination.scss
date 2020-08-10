@@ -1,0 +1,23 @@
+.pag {
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  min-width: calc(100vw-230px);
+  z-index: 100;
+
+  border: 1px solid black;
+  background-color: #fff;
+
+  .left {
+    .item {
+      margin: 0 10px;
+    }
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .right {
+  }
+}

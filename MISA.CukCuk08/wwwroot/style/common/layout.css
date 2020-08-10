@@ -1,0 +1,23 @@
+#header {
+  width: 100vw;
+  height: 60px;
+}
+
+#content-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+#left-menu {
+  width: 230px;
+  min-width: 230px;
+  height: 100%;
+}
+
+#content {
+  width: calc(100vw - $menu-left-width);
+  height: 100%;
+}
+/*# sourceMappingURL=layout.css.map */

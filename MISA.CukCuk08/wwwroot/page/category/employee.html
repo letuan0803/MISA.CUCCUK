@@ -1,0 +1,491 @@
+﻿<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MISA CUCCUK</title>
+    <link rel="shortcut icon" href="#">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+    <link href="../../asset/vendors/bootstrap-4.3.1/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../style/common/button.css" rel="stylesheet" />
+    <link href="../../style/common/dialogemployee.css" rel="stylesheet" />
+    <link href="../../style/common/left-menu.css" rel="stylesheet" />
+    <link href="../../style/common/header.css" rel="stylesheet" />
+    <link href="../../style/common/pagination.css" rel="stylesheet" />
+    <link href="../../style/common/layout.css" rel="stylesheet" />
+    <link href="../../style/content.css" rel="stylesheet" />
+    <link href="../../style/common/style.css" rel="stylesheet" />
+
+    <script src="https://kit.fontawesome.com/21df77fa85.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section id="header">
+        <span class="header-left">
+            <span class="logo-wrap">
+                <img class="img" src="/asset/images/icon-left-header.png" alt="" />
+                <img class="img" src="/asset/images/logo-text.png" alt="" />
+            </span>
+        </span>
+        <span class="header-right">
+            <span class="left">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle restaurant" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Nhà hàng biển đông
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Nhà hàng biển tây</a>
+                        <a class="dropdown-item" href="#">Nhà hàng biển bắc</a>
+                        <a class="dropdown-item" href="#">Nhà hàng biển nam</a>
+
+                    </div>
+                </div>
+            </span>
+            <span class="right">
+                <span class="dropdown">
+                    <button class="btn dropdown-toggle lang" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Tiếng Việt (Tiếng Việt)
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Tiếng Anh</a>
+                        <a class="dropdown-item" href="#">Tiếng Nga</a>
+                    </div>
+                </span>
+                <span class="noti">
+                    <img src="../../asset/images/ic_hoadon.png" alt="">
+                </span>
+                <span class="quess">
+                    <img src="../../asset/images/quess.PNG" alt="">
+                </span>
+                <span class="contact">
+                    <img src="../../asset/images/ic_hoadon.png" alt="">
+                </span>
+                <span class="dropdown">
+                    <img class="img mb-2" src="/asset/images/EmployeeImage.png" alt="" />
+                    <button class="btn dropdown-toggle user" style="color:rgb(33, 37, 41)" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Lê Thanh Tuấn
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Lê Thanh Tâm</a>
+                    </div>
+                </span>
+            </span>
+    </section>
+    <!-- ******************************************************** -->
+    <div id="content-wrap">
+        <section id="left-menu">
+            <div class="menu-item">
+                <div class="menu-item-icon icon-home"></div>
+                <div class="menu-item-text">Tổng quan</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Báo cáo</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon icon-sale"></div>
+                <div class="menu-item-text">Bán hàng</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon icon-directory"></div>
+                <div class="menu-item-text">Danh mục</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon icon-money"></div>
+                <div class="menu-item-text">Quỹ tiền mặt</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-icon icon-discount"></div>
+                <div class="menu-item-text">Khuyến mại</div>
+            </div>
+
+        </section>
+
+        <!-- ******************************************************** -->
+        <section id="content">
+            <div class="header">
+                <span class="left">
+                    <span class="big-text">Danh mục</span>
+                    <i class="fas fa-caret-right pl-2 pr-2"></i>
+                    <a href="#" class="small-text">Khách hàng</a>
+                </span>
+                <span class="right">
+                    <a href="#" class="back p-2">Quay lại thiết lập ban đầu</a>
+                    <span class="feedback m-2 p-2">
+                        <img src="/asset/images/viewEmail.png" alt="">
+                        <a href="#">Phản hồi</a>
+                    </span>
+                </span>
+            </div>
+            <!--Toolbar-->
+            <div class="toolbar">
+                <button id="btnAdd">
+                    <div class="btn-icon btn-icon-add"></div>
+                    <dic class="btn-text">Thêm</dic>
+                </button>
+                <button id="btnDuplicate">
+                    <div class="btn-icon btn-icon-duplicate"></div>
+                    <dic class="btn-text">Nhân bản</dic>
+                </button>
+                <button id="btnEdit">
+                    <div class="btn-icon btn-icon-edit"></div>
+                    <dic class="btn-text">Sửa</dic>
+                </button>
+                <button id="btnDelete">
+                    <div class="btn-icon btn-icon-delete"></div>
+                    <dic class="btn-text">Xóa</dic>
+                </button>
+                <button id="btnRefresh">
+                    <div class="btn-icon btn-icon-refresh"></div>
+                    <dic class="btn-text">Nạp</dic>
+                </button>
+                <button id="btnImport">
+                    <div class="btn-icon btn-icon-import"></div>
+                    <dic class="btn-text">Nhập</dic>
+                </button>
+                <button id="btnExport">
+                    <div class="btn-icon btn-icon-export"></div>
+                    <dic class="btn-text">Xuất</dic>
+                </button>
+                <button id="btnGroupEmployees">
+                    <div class="btn-icon btn-icon-group-employees"></div>
+                    <dic class="btn-text">Gộp</dic>
+                </button>
+                <button id="btnHelpText">
+                    <div class="btn-icon btn-icon-help"></div>
+                    <dic class="btn-text">Giúp</dic>
+                </button>
+            </div>
+            <div class="grid">
+                <table id="tbListEmployee" border="1">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div>Mã nhân viên</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpEmployeeCode">
+                                </div>
+
+                            </th>
+                            <th>
+                                <div>Tên nhân viên</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpEmployeeName">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Giới tính</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpGender">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Ngày sinh</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpBirthday">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Số điện thoại</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpPhoneNumber">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Email</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpEmail">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Vị trí</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpPosition">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Phòng ban</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpDepartment">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Mức lương</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpSalary">
+                                </div>
+                            </th>
+                            <th>
+                                <div>Tình trạng công việc</div>
+                                <div>
+                                    <div class="icon">*</div>
+                                    <input type="text" id="inpStatus">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pag">
+                <span class="left">
+                    <img src="../../asset/images/grid/page-first.png" class="item" alt="" id="firstPage">
+                    <img src="../../asset/images/grid/page-prev.png" class="item" alt="" id="prevPage">
+                    <label for="inp-page" class="item">Trang</label>
+                    <input type="text" id="inp-page" class="item" value="1" style="width: 30px">
+                    <span id="total-page" class="item">trên</span>
+                    <img src="../../asset/images/grid/page-next.png" alt="" id="nextPage" class="item">
+                    <img src="../../asset/images/grid/page-last.png" alt="" id="lastPage" class="item">
+                    <img src="../../asset/images/grid/refresh.png" alt="" id="refresh" class="item">
+                    <span class="dropdown" class="item">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            100
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">125</a>
+                            <a class="dropdown-item" href="#">150</a>
+                            <a class="dropdown-item" href="#">200</a>
+                        </div>
+                    </span>
+                </span>
+                <span class="right float-right mr-2">
+                    <span>Hiển thị 1 - </span>
+                    <span>22</span>
+                    <span>trên</span>
+                    <span>22</span>
+                    <span>kết quả</span>
+                </span>
+            </div>
+        </section>
+    </div>
+
+    <!--Form thông tin chi tiết-->
+    <div id="formDialogDetail" class="form-dialog" style="display:none">
+        <div class="dialog-modal"></div>
+        <div class="dialog">
+            <div class="dialog-titlebar">
+                <div class="title">Thông tin nhân viên</div>
+                <div id="btnCloseHeader" class="btn-close">&times;</div>
+            </div>
+            <div class="dialog-body">
+                <div class="row">
+                    <div class="w-100 form-title">
+                        Thông tin chung
+                    </div>
+                </div>
+                <div class="row mb-0p">
+                    <div class="w-78">
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtEmployeeCode">Mã nhân viên&nbsp;<span style="color:red;">(*)</span></label>
+                            </div>
+                            <div class="right-item">
+                                <input type="text" id="txtEmployeeCode" />
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtEmployeeName">Tên nhân viên&nbsp;<span style="color:red;">(*)</span></label>
+                            </div>
+                            <div class="right-item">
+                                <input type="text" id="txtEmployeeName" />
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="dtBirthday">Ngày sinh</label>
+                            </div>
+
+                            <div class="right-item">
+                                <input class="short-input" type="date" id="dtBirthday" />
+                                <div class="short-row-item pl-8p">
+                                    <label for="selectGender" class="right-label">Giới tính</label>
+                                    <select class="short-input" id="selectGender">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtEmail">Email&nbsp;<span style="color:red;">(*)</span></label>
+                            </div>
+                            <div class="right-item">
+                                <input type="text" id="txtEmail" />
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtPhoneNumber">ĐT di động&nbsp;<span style="color:red;">(*)</span></label>
+                            </div>
+                            <div class="right-item">
+                                <input type="text" id="txtPhoneNumber" />
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtIdentificationCard">Số CMT/HC</label>
+                            </div>
+
+                            <div class="right-item">
+                                <input class="short-input" type="text" id="txtIdentificationCard" />
+                                <div class="short-row-item ml-8p">
+                                    <label for="dtDateOfIssue" class="right-label">Ngày cấp</label>
+                                    <input class="short-input" type="date" id="dtDateOfIssue" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-upload-image">
+                        <div class="avatar-upload">
+                            <div class="upload-control">
+                                <button class="choose-file mr-8p">...</button>
+                                <button class="delete-avatar">&times;</button>
+                            </div>
+                        </div>
+                        <div class="image-info">
+                            Chỉ được upload tệp<br /> <b><i>.jpg .jpeg .png .gif</i></b>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="w-100">
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtPlaceOfIssue">Nơi cấp CMND</label>
+                            </div>
+                            <div class="right-item">
+                                <input type="text" id="txtPlaceOfIssue" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="w-100 form-title">
+                        Thông tin công việc
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="w-100">
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="selectPosition">Vị trí</label>
+                            </div>
+                            <div class="right-item">
+                                <select class="w-100" id="selectPosition">
+                                    <option value="Nhân viên">Nhân viên</option>
+                                    <option value="Phó tổng giám đốc">Phó tổng giám đốc</option>
+                                    <option value="Chánh văn phòng">Chánh văn phòng</option>
+                                    <option value="Trưởng phòng">Trưởng phòng</option>
+                                    <option value="Tổng giám đốc">Tổng giám đốc</option>
+                                    <option value="Giám đốc khối">Giám đốc khối</option>
+                                    <option value="Quản lý nghiệp vụ">Quản lý nghiệp vụ</option>
+                                    <option value="Quản lý dự án">Quản lý dự án</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="selectDepartment">Phòng ban</label>
+                            </div>
+                            <div class="right-item">
+                                <select class="w-100" name="cars" id="selectDepartment">
+                                    <option value="Khối sản xuất">Khối sản xuất</option>
+                                    <option value="Văn phòng TP Hồ Chí Minh">Văn phòng TP Hồ Chí Minh</option>
+                                    <option value="Phòng nghiên cứu">Phòng nghiên cứu</option>
+                                    <option value="Văn phòng Đà Nẵng">Văn phòng Đà Nẵng</option>
+                                    <option value="Viện đào tạo và nghiên cứu công nghệ">Viện đào tạo và nghiên cứu công nghệ</option>
+                                    <option value="Phòng đào tạo">Phòng đào tạo</option>
+                                    <option value="Văn phòng Hà Nội">Văn phòng Hà Nội</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="txtEmployeeTaxCode">Mã số thuế cá nhân</label>
+                            </div>
+                            <div class="right-item">
+                                <input class="short-input" type="text" id="txtEmployeeTaxCode" />
+                                <div class="short-row-item ml-8p">
+                                    <label for="txtSalary" class="right-label">Mức lương</label>
+                                    <input class="medium-input" type="text" id="txtSalary" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <div class="left-item">
+                                <label for="dtJoinDate">Ngày gia nhập</label>
+                            </div>
+                            <div class="right-item">
+                                <input class="short-input" type="date" id="dtJoinDate" />
+                                <div class="short-row-item ml-8p">
+                                    <label for="selectStatusJob" class="right-label">Tình trạng</label>
+
+                                    <select class="medium-input" name="cars" id="selectStatusJob">
+                                        <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                                        <option value="Đang làm việc">Đang làm việc</option>
+                                        <option value="Đang thử việc">Đang thử việc</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="dialog-footer">
+                <div class="footer-right">
+                    <button class="btn" id="btnSave">Cất</button>
+                    <button class="btn" id="btnSaveAdd" disabled>Cất & Thêm</button>
+                    <button class="btn" id="btnClose">Đóng</button>
+                </div>
+                <div class="footer-left">
+                    <button class="btn" id="btnHelp" disabled>Giúp</button>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+
+        <script src="../../js/page/employee.js"></script>
+        <script src="../../js/helps/resource.js"></script>
+        <script src="../../js/helps/common.js"></script>
+        <script src="../../js/lib/jquery-3.5.1.js"></script>
+        <script src="../../js/helps/pagination.js"></script>
+
+</body>
+
+</html>

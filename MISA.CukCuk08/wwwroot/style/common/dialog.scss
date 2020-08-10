@@ -1,0 +1,149 @@
+.form-dialog {
+  position: absolute;
+  z-index: 200;
+}
+
+.dialog-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+  opacity: 0.4;
+}
+
+.dialog {
+  position: fixed;
+  width: 650px;
+  height: 420px;
+  background-color: #ffffff;
+  top: calc(50% - 200px);
+  left: calc(50% - 300px);
+  border-radius: 5px;
+  border: 5px solid #0072bc;
+
+  .dialog-titlebar {
+    color: #ffffff;
+    width: 100%;
+    background-color: #0072bc;
+    height: 30px;
+    /* border-top-left-radius: 4px;
+        border-top-right-radius: 4px;*/
+    .title {
+      float: left;
+      line-height: 25px;
+      padding-left: 4px;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      text-align: center;
+      width: 16px;
+      height: 16px;
+      float: right;
+      line-height: 13px;
+      font-weight: 500;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #0072bc;
+      cursor: pointer;
+    }
+  }
+
+  .dialog-body {
+    width: 100%;
+    padding: 8px;
+    label {
+      display: inline-block;
+      width: 125px;
+    }
+    .row {
+      margin: 7px;
+    }
+
+    input {
+      border: 1px solid #d9d9d9;
+    }
+
+    input:focus {
+      border-color: deepskyblue;
+    }
+
+    .row-customer-name {
+      position: absolute;
+      top: 39px;
+      right: 8px;
+    }
+
+    .row-checkbox {
+      position: absolute;
+      top: 200px;
+      right: 8px;
+
+    }
+
+    .row-email {
+      position: absolute;
+      top: 233px;
+      right: 8px;
+    }
+    .row-upload-avatar {
+      position: absolute;
+      top: 69px;
+      right: 75;
+      label {
+        position: absolute;
+        top: 34px;
+        left: -127px;
+      }
+      input {
+        width: 100px;
+        height: 100px;
+        background-image: url(../../asset/images/avatardefault.png);
+        background-repeat: no-repeat;
+      }
+    }
+
+    .small-input {
+      width: 170px;
+      height: 20px;
+    }
+
+    .large-input {
+      width: 485px;
+      height: 20px;
+    }
+
+    #txtNote {
+      height: 40px;
+    }
+
+    #dtBirthday {
+      width: 173px;
+      height: 25px;
+    }
+  }
+
+  .dialog-footer {
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    bottom: 9px;
+    left: 0;
+    right: 0;
+    height: 40px;
+
+    .footer-left {
+      position: absolute;
+      left: 15px;
+    }
+
+    .footer-right {
+      position: absolute;
+      right: 9px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>452cdb81-10ed-4e5e-84a9-a12d76fb79fa</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\content\icons\" />
+    <Folder Include="wwwroot\upload\" />
+    <Folder Include="wwwroot\page\stock\" />
+    <Folder Include="wwwroot\page\report\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\CODEOWNERS" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\ISSUE_TEMPLATE\bug.md" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\ISSUE_TEMPLATE\bug_report.md" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\ISSUE_TEMPLATE\feature.md" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\ISSUE_TEMPLATE\feature_request.md" />
+    <None Include="wwwroot\content\vendors\bootstrap-4.3.1\.github\SUPPORT.md" />
+  </ItemGroup>
+
+
+</Project>

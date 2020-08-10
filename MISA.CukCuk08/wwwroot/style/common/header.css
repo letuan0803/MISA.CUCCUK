@@ -1,0 +1,61 @@
+#header {
+  color: #fff;
+  background-color: #0873b9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#header .header-left {
+  min-width: 230px;
+  padding-left: 20px;
+}
+
+#header .header-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 85vw;
+  margin: 0 20px;
+}
+
+#header .header-right .left .restaurant {
+  background-color: #025080;
+  color: #fff;
+}
+
+#header .header-right .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-width: 700px;
+}
+
+#header .header-right .right .lang {
+  background-color: #025080;
+  color: #fff;
+}
+
+#header .header-right .right .quess img {
+  height: 60px;
+}
+
+#header .header-right .right .user {
+  color: #fff;
+}
+/*# sourceMappingURL=header.css.map */

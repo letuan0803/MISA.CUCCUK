@@ -1,0 +1,60 @@
+$primary-color: #0873b9;
+$sub-color: #005185;
+$selected-color: #0199fc;
+
+#header {
+  color: #fff;
+  background-color: $primary-color;
+  display: flex;
+  align-items: center;
+
+  .header-left {
+    // width: 15vw;
+    min-width: 230px;
+    padding-left: 20px;
+
+    .logo-wrap {
+      img {
+      }
+    }
+  }
+  .header-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 85vw;
+    margin: 0 20px;
+
+    .left {
+      .restaurant {
+        background-color: #025080;
+        color: #fff;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 700px;
+
+      .lang {
+        background-color: #025080;
+        color: #fff;
+      }
+      .noti {
+      }
+      .quess {
+        img {
+          height: 60px;
+        }
+      }
+      .contact {
+      }
+      .user {
+        // background-color: #025080;
+        color: #fff;
+      }
+    }
+  }
+}

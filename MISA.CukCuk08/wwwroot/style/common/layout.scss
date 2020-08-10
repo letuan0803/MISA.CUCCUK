@@ -1,0 +1,25 @@
+// layout chung cho ứng dụng
+
+$header-height: 60px;
+$menu-left-width: 230px;
+
+#header {
+  width: 100vw;
+  height: $header-height;
+}
+
+#content-wrap {
+  display: flex;
+  height: 100%;
+}
+
+#left-menu {
+  width: $menu-left-width;
+  min-width: 230px;
+  height: 100%;
+}
+
+#content {
+  width: calc(100vw - $menu-left-width);
+  height: 100%;
+}

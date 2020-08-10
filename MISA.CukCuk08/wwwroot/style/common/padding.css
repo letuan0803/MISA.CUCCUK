@@ -1,0 +1,80 @@
+/*Pagination*/
+.pagination {
+  width: 100%;
+  height: 30px;
+  border-top: 1px solid #ccc;
+  background: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.pagination button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  outline: none;
+}
+.pagination button:hover {
+  border-color: #0973b9;
+  cursor: pointer;
+}
+
+.pagination .p-left {
+  display: flex;
+  align-items: center;
+}
+.pagination .p-left .page-first {
+  background: url("/content/images/grid/page-first.png") no-repeat;
+  height: 28px;
+  width: 28px;
+  background-position: center center;
+}
+
+.pagination .p-left .page-prev {
+  background: url("/content/images/grid/page-prev.png") no-repeat;
+  height: 28px;
+  width: 28px;
+  background-position: center center;
+}
+
+.pagination .p-left .page-next {
+  background: url("/content/images/grid/page-next.png") no-repeat;
+  height: 28px;
+  width: 28px;
+  background-position: center center;
+}
+
+.pagination .p-left .page-last {
+  background: url("/content/images/grid/page-last.png") no-repeat;
+  height: 28px;
+  width: 28px;
+  background-position: center center;
+}
+
+.pagination .p-left .page-refresh {
+  background: url("/content/images/grid/refresh.png") no-repeat;
+  height: 28px;
+  width: 30px;
+  background-position: center center;
+}
+
+.pagination .p-left #txtPageCurrent {
+  height: 22px;
+  width: 38px;
+  margin: auto 2px;
+  border: 1px solid #ccc;
+  padding-bottom: 0px;
+  outline: none;
+}
+
+.pagination .p-right {
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}

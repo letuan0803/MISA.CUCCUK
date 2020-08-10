@@ -80,7 +80,8 @@ var commonJS = {
      * @param {any} maxCode
      */
     formatCode(maxCode) {
-        var tmp = (parseInt(maxCode.substr(2, 5)) + 1).toString();
+        debugger
+        tmp = (maxCode+1).toString()
         while (tmp.length < 5) {
             tmp = '0' + tmp;
         }

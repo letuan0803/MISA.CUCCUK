@@ -17,4 +17,8 @@
 .pag .left img {
   cursor: pointer;
 }
+
+.pag .left img:hover {
+  background-color: #0873b9;
+}
 /*# sourceMappingURL=pagination.css.map */

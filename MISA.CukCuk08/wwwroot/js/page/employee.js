@@ -8,6 +8,10 @@ var currentPage = 10
 var totalRecord
 // Số bản ghi mỗi trang
 var recordPerPage = 100
+// Tổng số trang
+var totalPage
+// Tổng số bản ghi
+var totalRecord
 
 $(document).ready(function () {
     //load dữ liệu
@@ -136,13 +140,14 @@ class EmployeeJS {
      * @author LTTuan (29/07/2020)
      */
     btnAddOnClick(sender) {
+        debugger
         console.log("EmployeeJS -> btnAddOnClick -> btnAddOnClick")
         //Show dialog
         $("#formDialogDetail").show();
         // Focus vào ô input đầu tiên của dialog
         $('#txtEmployeeCode').focus();
         // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1
-        $('#txtStaffCode').val(commonJS.formatCode(maxCode));
+        $('#txtEmployeeCode').val(commonJS.formatCode(maxEmployeeCode));
     }
 
     /**
@@ -368,7 +373,7 @@ class EmployeeJS {
         try {
             //làm trống table
             $('#tbListEmployee tbody').empty();
-debugger
+            debugger
             // Lấy số dòng trên một trang
             currentPage = $("#inpPage").val();
             // Lấy số trang hiện tại
@@ -683,8 +688,6 @@ debugger
                     (item.email.toLowerCase().includes(inpEmail.toLowerCase()) || inpEmail == "") &&
                     (commonJS.formatDate(new Date(item['birthday'])).includes(inpBirthday) || inpBirthday == "")
                 ) {
-
-
                     var employeeInfoHTML = $(`<tr>
                                     <td>`+ item['employeeCode'] + `</td>
                                     <td>`+ item['employeeName'] + `</td>
@@ -722,8 +725,9 @@ debugger
     
      */
     updatePadding() {
+        debugger
+        console.log("update padding")
         //cập nhât tổng số bản ghi 
-        var totalRecord;
 
         $.ajax({
             url: "/totalRecord",
@@ -737,7 +741,6 @@ debugger
         });
 
         //cập nhập tổng số trang
-        var totalPage;
         if (totalRecord % recordPerPage == 0) { totalPage = totalRecord / recordPerPage } else {
             totalPage = Math.floor(totalRecord / recordPerPage + 1)
         }
@@ -750,6 +753,9 @@ debugger
         else {
             lastRecordOfPage = totalRecord;
         }
+        // cập nhập giá trị employeecode lớn nhất
+        maxEmployeeCode = totalRecord;
+
         //cập nhật giá trị phân trang
         $("#inpPage").val(currentPage);
         $("#totalPage").text(totalPage);
@@ -775,7 +781,9 @@ debugger
      * */
     btnPrePageOnClick() {
         if ($('#inpPage').val() > 1) {
-            $("#inpPage").val(currentPage-1);
+            $("#inpPage").val(currentPage - 1);
+            this.loadData();
+        } else {
             this.loadData();
         }
     }
@@ -786,8 +794,9 @@ debugger
      * */
     btnNextPageOnClick() {
         debugger
+
         if ($('#inpPage').val() < totalPage) {
-            $("#inpPage").val(currentPage+1);
+            $("#inpPage").val(Number(currentPage) + 1);
             this.loadData();
         }
     }
@@ -798,8 +807,8 @@ debugger
      * */
     btnEndPageOnClick() {
         debugger
-            $("#inpPage").val(totalPage);
-            this.loadData();
+        $("#inpPage").val(totalPage);
+        this.loadData(); 
     }
 
 }

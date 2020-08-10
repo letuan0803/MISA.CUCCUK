@@ -62,7 +62,7 @@ namespace MISA.CukCuk.Controllers
         [HttpGet("{currentPage}/{recordPerPage}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int currentPage, int recordPerPage)
         {
-            var employee = await _context.Employee.Skip(recordPerPage*currentPage-1).Take(recordPerPage).ToListAsync();
+            var employee = await _context.Employee.OrderBy(s => s.EmployeeCode).Skip(recordPerPage*(currentPage-1)).Take(recordPerPage).ToListAsync();
 
             return employee;
         }

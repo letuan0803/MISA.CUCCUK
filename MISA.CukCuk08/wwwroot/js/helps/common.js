@@ -4,13 +4,26 @@ var commonJS = {
     /**
     * Hàm định dạng hiển thị tiền
     * @param {number} money
-    * CreatedBy: NVMANH (20/07/2020)
+    * CreatedBy: LTTUAN (12/08/2020)
     */
     formatMoney(money) {
         try {
             return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
         } catch (error) {
             return 0;
+        }
+    },
+
+    /**
+    * Hàm định dạng hiển thị tiền để bind dữ liệu
+    * @param {number} money
+    * CreatedBy: LTTUAN (12/08/2020)
+    */
+    formatMoneyToBind(money) {
+        try {
+            return money.replace(".","");
+        } catch (error) {
+            0
         }
     },
 
@@ -34,12 +47,17 @@ var commonJS = {
      * @param {any} date
      */
     formatDate(date) {
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        month = (month < 10) ? "0" + month : month;
-        day = (day < 10) ? "0" + day : day;
-        return day + "/" + month + "/" + year;
+        try {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            month = (month < 10) ? "0" + month : month;
+            day = (day < 10) ? "0" + day : day;
+            return day + "/" + month + "/" + year;
+        } catch (error) {
+
+        }
+
     },
 
     /**
@@ -47,12 +65,16 @@ var commonJS = {
      * @param {any} date
      */
     formatDateToBind(date) {
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        month = (month < 10) ? "0" + month : month;
-        day = (day < 10) ? "0" + day : day;
-        return year + "-" + month + "-" + day;
+        try {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            month = (month < 10) ? "0" + month : month;
+            day = (day < 10) ? "0" + day : day;
+            return year + "-" + month + "-" + day;
+        } catch (error) {
+
+        }
     },
 
     /**
@@ -61,8 +83,13 @@ var commonJS = {
  * CreateBy: LTTUAN (05/08/2020)
  */
     validateEmail(email) {
-        const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regex.test(email);
+        try {
+            const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return regex.test(email);
+        } catch (error) {
+
+        }
+
     },
 
 
@@ -72,7 +99,12 @@ var commonJS = {
      * CreateBy: LTTUAN (05/08/2020)
      */
     validatePhone(phoneNumber) {
-        return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phoneNumber);
+        try {
+            return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phoneNumber);
+        } catch (error) {
+
+        }
+
     },
 
     /**
@@ -80,19 +112,28 @@ var commonJS = {
  * @param {any} maxCode
  */
     formatCode(maxCode) {
-        debugger
-        tmp = (maxCode + 1).toString()
-        while (tmp.length < 5) {
-            tmp = '0' + tmp;
+        try {
+            tmp = (maxCode + 1).toString()
+            while (tmp.length < 5) {
+                tmp = '0' + tmp;
+            }
+            return "NV" + tmp;
+        } catch (error) {
+
         }
-        return "NV" + tmp;
+
     },
     /**
      * Hàm trả về tiền dưới dạng string để gửi dữ liệu DB
      * @param {any} money
      */
     formatMoneyToBind(money) {
-        return money.replace(/[.]/g, "");
+        try {
+            return money.replace(/[.]/g, "");
+        } catch (error) {
+
+        }
+
     },
 
     /**
@@ -100,8 +141,13 @@ var commonJS = {
      * @param {any} imageLink
      */
     formatImageLink(imageLink) {
-        var startLink = imageLink.indexOf("\\content");
-        imageLink = imageLink.replace(/[\\]/g, "/");
-        return imageLink.substr(startLink, imageLink.length - 1);
+        try {
+            var startLink = imageLink.indexOf("\\content");
+            imageLink = imageLink.replace(/[\\]/g, "/");
+            return imageLink.substr(startLink, imageLink.length - 1);
+        } catch (error) {
+
+        }
+
     }
 }

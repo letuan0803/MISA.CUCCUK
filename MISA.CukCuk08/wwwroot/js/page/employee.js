@@ -91,33 +91,43 @@ class EmployeeJS {
         $("#txtSalary").on("blur", this.blurSalary.bind(this))
         // Sự kiện khi nhấn ctr+s, ctrl+shift+s, ctrl+q, esc
         $("#formDialogDetail").on("keydown", function (event) {
+            // Biến lưu trữ phím vừa ấn
             var keyCode = event.which || event.keyCode;
+            // Sự kiện khi nhấn ctrl shift s
             if (keyCode == 83 && event.shiftKey && event.ctrlKey) {
                 event.preventDefault();
                 me.saveAddData()
-                if ((keyCode == 83 && event.ctrlKey) && !(event.shiftKey)) {
-                    event.preventDefault();
-                    me.saveData()
-                };
-                if (keyCode == 81 && event.ctrlKey) {
-                    event.preventDefault();
-                    me.btnCloseOnClick()
-                };
-                if (keyCode == 27) {
-                    event.preventDefault();
-                    me.btnCloseHeaderOnClick()
-                };
-            }});
-        }
+            }
+            // Sự kiện khi nhấn ctrl  s
+            if ((keyCode == 83 && event.ctrlKey) && !(event.shiftKey)) {
+                event.preventDefault();
+                me.saveData()
+            };
+            // Sự kiện khi nhấn ctrl q
+            if (keyCode == 81 && event.ctrlKey) {
+                event.preventDefault();
+                me.btnCloseOnClick()
+            };
+            // Sự kiện khi nhất esc
+            if (keyCode == 27) {
+                event.preventDefault();
+                me.btnCloseHeaderOnClick()
+            };
+        });
+    }
 
 
-
+    /**
+     * Định dạng tiền tệ k/hi rời khỏi ô
+     * CreatedBy: LTTUAN(12/08/2020)
+     */
     blurSalary() {
         var x = commonJS.formatMoney($("#txtSalary").val())
         $("#txtSalary").val(x);
     }
     /**
-     * Hàm thực hiện việc hiển thị
+     * Hàm thực hiện việc hiển thị ảnh
+     * CreatedBy: LTTUAN(12/08/2020)
      */
     showImageFromInput() {
 
@@ -133,6 +143,11 @@ class EmployeeJS {
         fileReader.readAsDataURL(file);
     }
 
+    /**
+     * Menu các trường hợp thêm sửa xoá
+     * CreatedBy: LTTUAN(12/08/2020)
+     * @param {any} sender chế độ form 
+     */
     toolbarItemOnClick(sender) {
         try {
             var FormMode = sender.data;
@@ -203,6 +218,7 @@ class EmployeeJS {
                     dataType: "json",
                     contentType: "application/json",
                 }).done(function (res) {
+                    // Khởi tạo mảng lưu trữ
                     var employeeDupicate = {
                         employeeCode: res.employeeCode,
                         employeeName: res.employeeName,
@@ -383,6 +399,7 @@ class EmployeeJS {
         try {
             // Ẩn ra warning-box
             $('#warning-box').hide();
+            // Load lại data
             me.loadData();
         } catch (e) {
             console.log(e);
@@ -451,9 +468,12 @@ class EmployeeJS {
                     employeeInfoHTML.data("employeeId", item.employeeId);
                     employeeInfoHTML.data("employeeName", item.employeeName);
 
+                    // Thêm dữ liệu vào table
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
                 });
+                // Cập nhật lại padding
                 me.updatePadding();
+                // Vô hiệu hoá các phím nhân bản, sửa, xoá
                 $("#btnDuplicate, #btnEdit, #btnDelete").prop('disabled', true);
             }).fail(function (res) {
             })
@@ -486,7 +506,7 @@ class EmployeeJS {
                 givenPlace = "",
                 position = "",
                 department = "",
-                salary = "",
+                salary = 0,
                 startDate = "",
                 status = "",
                 //employeeAvatar = "asset\\images\\avatardefault.png"
@@ -506,7 +526,7 @@ class EmployeeJS {
             position = $('#selectPosition').val();
             department = $('#selectDepartment').val();
             startDate = new Date($('#dtJoinDate').val());
-            salary = Number($('#txtSalary').val());
+            salary = Number(commonJS.formatMoneyToBind($('#txtSalary').val()));
             // employeeAvatar
             status = $('#selectStatusJob').val();
 
@@ -566,7 +586,6 @@ class EmployeeJS {
                     };
                     //Nếu form là form nhập mới
                     console.log("EmployeeJS -> saveData -> action")
-                    //thêm phần tử vào cuối mảng
                     $.ajax({
                         url: "/api/v1/Employees/",
                         method: "POST",
@@ -680,7 +699,7 @@ class EmployeeJS {
     resetDialog() {
         console.log("EmployeeJS -> resetDialog -> resetDialog")
 
-
+        // Làm trống bảng
         $('#txtEmployeeCode').val("");
         $('#txtEmployeeName').val("");
         $('#dtBirthday').val("");
@@ -704,7 +723,6 @@ class EmployeeJS {
     * Sự kiện khi click button đóng dưới footer của Dialog
     * CreatedBy: LTTUAN (24/07/2020)
     * */
-
     btnCloseOnClick() {
         console.log("EmployeeJS -> btnCloseOnClick -> btnCloseOnClick")
         // Hide dialog
@@ -726,9 +744,9 @@ class EmployeeJS {
     }
 
     /**
-* Sự kiện khi click button đóng dưới footer của Dialog
-* CreatedBy: LTTUAN (24/07/2020)
-* */
+    * Sự kiện khi click button đóng dưới footer của Dialog
+    * CreatedBy: LTTUAN (24/07/2020)
+    * */
 
     btnCloseOnClickValidate() {
         console.log("EmployeeJS -> btnCloseOnClick -> btnCloseOnClick")
@@ -777,9 +795,6 @@ class EmployeeJS {
             var inpSalary = $("#inpSalary").val();
             var inpStatus = $("#inpStatus").val();
 
-
-            // var is5FoodCheckBox = $("#is5FoodCheckBox")[0].checked;
-
             // làm trống table trước
             $("#tbListEmployee tbody").empty();
             // nếu dữ liệu hợp lệ thì tạo đối tượng
@@ -822,11 +837,9 @@ class EmployeeJS {
         })
     }
 
-
-
     /**
      * Hàm cập nhật sự thay đổi của phân trang
-    
+     * CreatedBy: LTTUAN(12/08/2020)
      */
     updatePadding() {
 
@@ -875,6 +888,7 @@ class EmployeeJS {
     * CreatedBy: LTTUAN (06/08/2020)
     * */
     btnFirstPageOnClick() {
+        // Quay lại trang đầu tiên
         $("#inpPage").val(1);
         this.loadData();
     }
@@ -884,6 +898,7 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (06/08/2020)
      * */
     btnPrePageOnClick() {
+        // Giảm trang hiện tại lên 1 đơn vị
         if ($('#inpPage').val() > 1) {
             $("#inpPage").val(currentPage - 1);
             this.loadData();
@@ -898,7 +913,7 @@ class EmployeeJS {
      * */
     btnNextPageOnClick() {
 
-
+        // Tăng trang hiện tại lên 1 đơn vị
         if ($('#inpPage').val() < totalPage) {
             $("#inpPage").val(Number(currentPage) + 1);
             this.loadData();
@@ -910,7 +925,7 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (06/08/2020)
      * */
     btnEndPageOnClick() {
-
+        // Nhảy đến cuối trang
         $("#inpPage").val(totalPage);
         this.loadData();
     }

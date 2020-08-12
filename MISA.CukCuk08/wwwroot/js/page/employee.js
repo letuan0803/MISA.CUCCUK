@@ -1,4 +1,5 @@
 var me = null
+//chế độ Form
 var FormMode
 // Mã nhân viên lớn nhất
 var maxEmployeeCode
@@ -42,17 +43,20 @@ class EmployeeJS {
         $("#btnDelete").on("click", Enum.FormMode.Delete, this.toolbarItemOnClick.bind(this));
         $("#btnRefresh").on("click", this.loadData);
 
-        // Khi ấn nút đóng
+        // Khi ấn nút đóng cho form thêm sửa 
         $("#btnClose").on("click", this.btnCloseOnClick.bind(this));
         $("#btnCloseHeader").on("click", 0, this.btnCloseHeaderOnClick.bind(this));
 
+        // Khi ấn nút đóng cho form xác nhận
+        $("#btnCloseValidate").on("click", this.btnCloseOnClickValidate.bind(this));
+        $("#btnCloseHeaderValidate").on("click", 0, this.btnCloseHeaderOnClickValidate.bind(this));
+
         //Khi ấn nút cất
         $("#btnSave").click(this.saveData.bind(this));
+        $("#btnSaveAdd").click(this.saveAddData).bind(this);
 
         // Khi ấn vào 1 dòng trong table
         $("table").on("click", "tbody tr", this.rowOnClick);
-
-
 
         // Khi ấn nút chọn page số bao nhiêu
         $('#recordPerPage').on('change', this.loadData);
@@ -61,10 +65,10 @@ class EmployeeJS {
         $('#inpPage').on('change', this.loadData);
 
         // Khi ấn nút Yes trên warning-box
-        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteStaff.bind(this));
+        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteEmployee.bind(this));
 
         // Khi ấn nút No trên warning-box
-        $('#btn-close-warning').on('click', 0, this.notDeleteStaff);
+        $('#btn-close-warning').on('click', 0, this.notDeleteEmployee);
 
         // Phần fitler
         $("#tbListEmployee thead input").on("keydown", function (event) {
@@ -83,11 +87,40 @@ class EmployeeJS {
         $('#btnEndPage').on('click', this.btnEndPageOnClick.bind(this));
         $("#refresh").on("click", this.loadData)
 
+        // Sự kiện khi rời khỏi ô nhập mức lương
+        $("#txtSalary").on("blur", this.blurSalary.bind(this))
+        // Sự kiện khi nhấn ctr+s, ctrl+shift+s, ctrl+q, esc
+        $("#formDialogDetail").on("keydown", function (event) {
+            var keyCode = event.which || event.keyCode;
+            if (keyCode == 83 && event.shiftKey && event.ctrlKey) {
+                event.preventDefault();
+                me.saveAddData()
+                if ((keyCode == 83 && event.ctrlKey) && !(event.shiftKey)) {
+                    event.preventDefault();
+                    me.saveData()
+                };
+                if (keyCode == 81 && event.ctrlKey) {
+                    event.preventDefault();
+                    me.btnCloseOnClick()
+                };
+                if (keyCode == 27) {
+                    event.preventDefault();
+                    me.btnCloseHeaderOnClick()
+                };
+            }});
+        }
 
+
+
+    blurSalary() {
+        var x = commonJS.formatMoney($("#txtSalary").val())
+        $("#txtSalary").val(x);
     }
-
+    /**
+     * Hàm thực hiện việc hiển thị
+     */
     showImageFromInput() {
-        debugger
+
         var file = $(this)[0].files[0];
         var fileReader = new FileReader();
         fileReader.onload = function (event) {
@@ -96,7 +129,7 @@ class EmployeeJS {
             // $(".img-thumbnail").css("visibility", "visible");
             $("#img-info").html(file.name);
         };
-        debugger
+
         fileReader.readAsDataURL(file);
     }
 
@@ -140,7 +173,7 @@ class EmployeeJS {
      * @author LTTuan (29/07/2020)
      */
     btnAddOnClick(sender) {
-        debugger
+
         console.log("EmployeeJS -> btnAddOnClick -> btnAddOnClick")
         //Show dialog
         $("#formDialogDetail").show();
@@ -222,7 +255,7 @@ class EmployeeJS {
         console.log("EmployeeJS -> btnAddOnClick -> btnEditOnClick")
 
         try {
-            debugger
+
             if ($('.row-selected').length !== 0) {
                 //lấy thông tin đối tượng nhân viên
                 var rowSelected = $(".row-selected");
@@ -257,6 +290,8 @@ class EmployeeJS {
 
                         //Show dialog
                         $("#formDialogDetail").show();
+                        // Focus vào ô input đầu tiên của dialog
+                        $('#txtEmployeeCode').focus();
                     });
                 }).fail(function (res) {
                 })
@@ -279,15 +314,21 @@ class EmployeeJS {
         try {
             //action = hành động xóa
             // action = sender.data;
+
+
+            //lấy thông tin đối tượng nhân viên
+            var rowSelected = $(".row-selected");
+            var employeeName = rowSelected.data("employeeName");
+
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
-                //// Gán tên nhân viên vào warning-box
-                //$('#staff-name').html($('.row-selected').find('td:eq(1)').text());
-
+                // Gán tên nhân viên vào warning-box
+                $("#warning-text").text(employeeName)
                 // Show ra warning-box
                 $('#warning-box').show();
+                debugger
             }
-            debugger
+
         } catch (e) {
             console.log(e);
         }
@@ -298,7 +339,7 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (10/08/2020)
      * @param {any} sender
      */
-    deleteStaff(sender) {
+    deleteEmployee(sender) {
         try {
 
             // Đóng cửa số warning-box
@@ -306,7 +347,7 @@ class EmployeeJS {
 
             //Nếu thấy row có class là row-selected
             if ($(".row-selected").length !== 0) {
-                debugger
+
                 $.ajax({
                     url: "/api/v1/Employees/" + $(".row-selected").data('employeeId'),
                     method: "DELETE",
@@ -323,7 +364,7 @@ class EmployeeJS {
                 //thông báo xóa thành công
                 alert(Resource.Language[commonJS.LanguageCode].Delete);
             } else {
-                debugger
+
                 //thông báo xóa không thành công
                 alert(Resource.Language[commonJS.LanguageCode].CantDelete);
             }
@@ -338,7 +379,7 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (10/08/2020)
      * @param {any} sender
      */
-    notDeleteStaff(sender) {
+    notDeleteEmployee(sender) {
         try {
             // Ẩn ra warning-box
             $('#warning-box').hide();
@@ -373,7 +414,7 @@ class EmployeeJS {
         try {
             //làm trống table
             $('#tbListEmployee tbody').empty();
-            debugger
+
             // Lấy số dòng trên một trang
             currentPage = $("#inpPage").val();
             // Lấy số trang hiện tại
@@ -393,12 +434,12 @@ class EmployeeJS {
                                 <td>`+ item['employeeCode'] + `</td>
                                 <td>`+ item['employeeName'] + `</td>
                                 <td>`+ item['gender'] + `</td>
-                                <td>`+ commonJS.formatDate(new Date(item['birthday'])) + `</td>
-                                <td>`+ item['phoneNumber'] + `</td>
+                                <td style="text-align:center;">`+ commonJS.formatDate(new Date(item['birthday'])) + `</td>
+                                <td style="text-align:center;">`+ item['phoneNumber'] + `</td>
                                 <td>`+ item['email'] + `</td>
                                 <td>`+ item['position'] + `</td>
                                 <td>`+ item['department'] + `</td>
-                                <td>`+ commonJS.formatMoney(item['salary']) + `</td>
+                                <td style="text-align:right;">`+ commonJS.formatMoney(item['salary']) + `</td>
                                 <td>`+ item['status'] + `</td>
                             </tr>`);
                     employeeInfoHTML.data("idCard", item.idCard);
@@ -408,6 +449,7 @@ class EmployeeJS {
                     employeeInfoHTML.data("startDate", item.startDate);
                     employeeInfoHTML.data("employeeAvatar", item.employeeAvatar);
                     employeeInfoHTML.data("employeeId", item.employeeId);
+                    employeeInfoHTML.data("employeeName", item.employeeName);
 
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
                 });
@@ -429,7 +471,7 @@ class EmployeeJS {
         console.log("EmployeeJS -> saveData -> saveData");
         console.log("EmployeeJS -> saveData -> FormMode ", me.FormMode);
 
-        debugger
+
         try {
             //Khởi tạo các biến 
             var employeeCode = "",
@@ -473,30 +515,35 @@ class EmployeeJS {
 
             // Kiểm tra trống trường mã nhân viên
             if (!employeeCode) {
-                alert("Trường Mã nhân viên không được để trống!");
+                // alert("Trường Mã nhân viên không được để trống!");
+                me.showFormValidate("EmployeeCodeNull");
                 return false;
 
                 // Kiểm tra trống trường tên nhân viên
             } else if (!employeeName) {
-                alert("Trường Tên nhân viên không được để trống!");
+                // alert("Trường Tên nhân viên không được để trống!");
+                me.showFormValidate("EmployeeNameNull");
                 return false;
 
                 // Kiểm tra trống trường ĐT di động
             } else if (!phoneNumber) {
-                alert("Trường ĐT di động không được để trống!");
+                // alert("Trường ĐT di động không được để trống!");
+                me.showFormValidate("PhoneNumberNull");
                 return false;
 
                 // Kiểm tra trống trường email
             } else if (!email) {
-                alert("Trường email không được để trống!!");
+                // alert("Trường email không được để trống!!");
+                me.showFormValidate("EmailNull");
                 return false;
 
                 // Kiểm tra hợp lệ trường ĐT di động
             } else if (!commonJS.validateEmail(email)) {
-                alert("Trường email đã nhập không hợp lệ!");
+                // alert("Trường email đã nhập không hợp lệ!");
+                me.showFormValidate("EmailRegex");
                 return false;
             } else {
-                debugger
+
                 if (me.FormMode == Enum.FormMode.Add) {
                     // Từ các dữ liệu thu thập được thì build thành object nhân viên (employee)
                     var employeeAdd = {
@@ -539,7 +586,7 @@ class EmployeeJS {
                     }).fail(function (res) {
                         alert("Có lỗi khi thêm mới")
                     });
-                    debugger
+
 
                 } else if (me.FormMode == Enum.FormMode.Edit) {
                     //Nếu form là chỉnh sửa
@@ -564,7 +611,7 @@ class EmployeeJS {
                         status: status,
                         //employeeAvatar: "asset\\images\\avatardefault.png"
                     };
-                    debugger
+
                     $.ajax({
                         url: "/api/v1/Employees/" + employeeEdit.employeeId,
                         method: "PUT",
@@ -583,7 +630,7 @@ class EmployeeJS {
                         me.resetDialog();
 
                     }).fail(function (res) {
-                        debugger
+
                         alert("có lỗi khi sửa");;
                     });
                 }
@@ -593,6 +640,37 @@ class EmployeeJS {
             console.log(error)
         }
 
+    }
+
+    saveAddData() {
+        debugger
+        me.saveData();
+
+        if (me.FormMode == 1) {
+            $("#formDialogDetail").show();
+            // Focus vào ô input đầu tiên của dialog
+            $('#txtEmployeeCode').focus();
+            // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1 
+            $('#txtEmployeeCode').val(commonJS.formatCode(maxEmployeeCode));
+        }
+
+
+    }
+
+    /**
+     * Hàm thực hiện việc Validate
+     * CreatedBy: LTTUAN (29/7/2020)
+     */
+    validate() {
+
+    }
+    /**
+     * Hàm thực hiện việc hiển thị các form
+     * CreatedBy: LTTUAN (29/7/2020)
+     */
+    showFormValidate(sender) {
+        $("#formValidate").show();
+        $("#validateText").text(Resource.Language[commonJS.LanguageCode].Validate[sender])
     }
 
     /**
@@ -648,6 +726,31 @@ class EmployeeJS {
     }
 
     /**
+* Sự kiện khi click button đóng dưới footer của Dialog
+* CreatedBy: LTTUAN (24/07/2020)
+* */
+
+    btnCloseOnClickValidate() {
+        console.log("EmployeeJS -> btnCloseOnClick -> btnCloseOnClick")
+        // Hide dialog
+        $("#formValidate").hide();
+        // Reset lại dialog  chuẩn bị cho lần nhập sau
+        this.resetDialog();
+    }
+
+    /**
+    * Sự kiện khi click Đóng trên tiêu đề của Dialog
+    * CreatedBy: LTTUAN (24/07/2020)
+    * */
+    btnCloseHeaderOnClickValidate() {
+        console.log("EmployeeJS -> btnCloseHeaderOnClick -> btnCloseHeaderOnClick")
+        //Hide dialog
+        $("#formValidate").hide();
+        // Reset lại dialog  chuẩn bị cho lần nhập sau
+        this.resetDialog();
+    }
+
+    /**
      * Sự kiện khi nhập vào các ô tìm kiếm
      * CreatedBy: LTTUAN(10/08/2020)
      */
@@ -661,7 +764,7 @@ class EmployeeJS {
             method: "GET",
 
         }).done(function (res) {
-            debugger
+
             // lấy dữ liệu input filter
             var inpEmployeeCode = $("#inpEmployeeCode").val();
             var inpEmployeeName = $("#inpEmployeeName").val();
@@ -681,7 +784,7 @@ class EmployeeJS {
             $("#tbListEmployee tbody").empty();
             // nếu dữ liệu hợp lệ thì tạo đối tượng
             $.each(res, function (index, item) {
-                debugger
+
                 if ((item.employeeCode.toLowerCase().includes(inpEmployeeCode.toLowerCase()) || inpEmployeeCode == "") &&
                     (item.employeeName.toLowerCase().includes(inpEmployeeName.toLowerCase()) || inpEmployeeName == "") &&
                     (item.phoneNumber.toLowerCase().includes(inpPhoneNumber.toLowerCase()) || inpPhoneNumber == "") &&
@@ -692,12 +795,12 @@ class EmployeeJS {
                                     <td>`+ item['employeeCode'] + `</td>
                                     <td>`+ item['employeeName'] + `</td>
                                     <td>`+ item['gender'] + `</td>
-                                    <td>`+ commonJS.formatDate(new Date(item['birthday'])) + `</td>
-                                    <td>`+ item['phoneNumber'] + `</td>
+                                    <td style="text-align:center;">`+ commonJS.formatDate(new Date(item['birthday'])) + `</td>
+                                    <td style="text-align:center;">`+ item['phoneNumber'] + `</td>
                                     <td>`+ item['email'] + `</td>
                                     <td>`+ item['position'] + `</td>
                                     <td>`+ item['department'] + `</td>
-                                    <td>`+ item['salary'] + `</td>
+                                    <td style="text-align:right;">`+ commonJS.formatMoney(item['salary']) + `</td>
                                     <td>`+ item['status'] + `</td>
                                 </tr>`);
                     employeeInfoHTML.data("idCard", item.idCard);
@@ -707,6 +810,7 @@ class EmployeeJS {
                     employeeInfoHTML.data("startDate", item.startDate);
                     employeeInfoHTML.data("employeeAvatar", item.employeeAvatar);
                     employeeInfoHTML.data("employeeId", item.employeeId);
+                    employeeInfoHTML.data("employeeName", item.employeeName);
 
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
 
@@ -725,7 +829,7 @@ class EmployeeJS {
     
      */
     updatePadding() {
-        debugger
+
         console.log("update padding")
         //cập nhât tổng số bản ghi 
 
@@ -793,7 +897,7 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (06/08/2020)
      * */
     btnNextPageOnClick() {
-        debugger
+
 
         if ($('#inpPage').val() < totalPage) {
             $("#inpPage").val(Number(currentPage) + 1);
@@ -806,9 +910,9 @@ class EmployeeJS {
      * CreatedBy: LTTUAN (06/08/2020)
      * */
     btnEndPageOnClick() {
-        debugger
+
         $("#inpPage").val(totalPage);
-        this.loadData(); 
+        this.loadData();
     }
 
 }

@@ -55,7 +55,7 @@
   display: -ms-flexbox;
   display: flex;
   width: calc(100% - 4px);
-  height: 25px;
+  height: 35px;
   border: 1px solid #ccc;
   padding: 2px;
   background: #ededed;
@@ -135,7 +135,7 @@
 
 #content .grid {
   width: 100%;
-  height: calc(100% - 28px);
+  height: calc(100% - 190px);
   border: 1px solid #ccc;
   border-top: none;
   overflow: scroll;

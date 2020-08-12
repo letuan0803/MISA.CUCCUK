@@ -1,9 +1,9 @@
-﻿.form-dialog {
+.form-dialog {
   position: absolute;
 }
 
 .form-dialog label {
-  margin-bottom: 0px !important;
+  margin-left: 10px;
 }
 
 .right-label {
@@ -20,33 +20,33 @@
   opacity: 0.4;
 }
 
-.dialog {
+.dialog-validate {
   position: fixed;
   display: flex;
   flex-direction: column;
-  width: 700px;
-  height: 540px;
+  width: 300px;
+  height: 130px;
   background-color: #ffffff;
-  top: calc(50% - 250px);
+  top: calc(50% - 200px);
   left: calc(50% - 300px);
   border-radius: 5px;
   border: 5px solid #0072bc;
 }
 
-.dialog .dialog-titlebar {
+.dialog-validate .dialog-titlebar {
   color: #ffffff;
   width: 100%;
   background-color: #0072bc;
   height: 30px;
 }
 
-.dialog .dialog-titlebar .title {
+.dialog-validate .dialog-titlebar .title {
   float: left;
   line-height: 25px;
   padding-left: 4px;
 }
 
-.dialog .dialog-titlebar .btn-close {
+.dialog-validate .dialog-titlebar .btn-close {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -63,7 +63,7 @@
   cursor: pointer;
 }
 
-.dialog .dialog-body {
+.dialog-validate .dialog-body {
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -143,87 +143,12 @@ select:focus {
   width: 100%;
 }
 
-.dialog-body .form-upload-image {
-  padding-left: 8px;
-  width: 22%;
-  height: 142px;
-  position: relative;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.form-upload-image .avatar-upload {
-  width: 100%;
-  height: 142px;
-  background-color: red;
-  background: url("/asset/images/avatardefault.png") no-repeat center;
-  background-size: 100% 100%;
-}
-
-.form-upload-image .image-info {
-  text-align: center;
-}
-
-.dialog-body .input-file {
-  padding: 4px 12px;
-  width: 80px !important;
-  border: 1px solid #ccc;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
 
 .dialog-body .input-file:hover {
   color: white;
   background-color: #0072bc;
 }
 
-.dialog .img-thumbnail {
-  width: 85px;
-  height: 85px;
-}
-
-.dialog .upload-control {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 142px;
-  height: 40px;
-  bottom: 0;
-  right: 0;
-}
-
-.dialog .upload-control button {
-  display: flex;
-  align-items: center;
-  height: 50%;
-  width: 35px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 20px;
-  border-radius: unset;
-}
-
-.dialog .upload-control button:hover {
-  background-color: white;
-  border-color: #0973b9;
-  cursor: pointer;
-}
-
-.upload-control button.choose-file {
-  padding-bottom: 10px;
-  padding-left: 8px;
-}
-
-.upload-control button.delete-avatar {
-  color: red;
-  font-weight: bold;
-  padding-left: 10px;
-  padding-top: 2px;
-}
 
 .w-25 {
   width: 25%;
@@ -269,11 +194,7 @@ select:focus {
   right: 9px;
 }
 
-.currency {
-  position: absolute;
-  right: 8px;
-}
-
-.dialog input[type='date'] {
-  padding-left: 20px;
+#validateText{
+  margin-top: 10px;
+  margin-left: 30px;
 }

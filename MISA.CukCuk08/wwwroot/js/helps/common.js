@@ -55,11 +55,11 @@ var commonJS = {
         return year + "-" + month + "-" + day;
     },
 
-        /**
-     * Hàm kiểm tra hợp lệ trường email
-     * @param {any} email
-     * CreateBy: LTTUAN (05/08/2020)
-     */
+    /**
+ * Hàm kiểm tra hợp lệ trường email
+ * @param {any} email
+ * CreateBy: LTTUAN (05/08/2020)
+ */
     validateEmail(email) {
         const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(email);
@@ -75,13 +75,13 @@ var commonJS = {
         return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phoneNumber);
     },
 
-        /**
-     * Hàm trả về mã nhân viên lớn nhất + 1
-     * @param {any} maxCode
-     */
+    /**
+ * Hàm trả về mã nhân viên lớn nhất + 1
+ * @param {any} maxCode
+ */
     formatCode(maxCode) {
         debugger
-        tmp = (maxCode+1).toString()
+        tmp = (maxCode + 1).toString()
         while (tmp.length < 5) {
             tmp = '0' + tmp;
         }

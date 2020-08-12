@@ -20,6 +20,7 @@
     <link href="../../style/content.css" rel="stylesheet" />
     <link href="../../style/common/style.css" rel="stylesheet" />
     <link href="/css/common/warning.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../style/common/dialogvalidate.css">
 
 
     <script src="https://kit.fontawesome.com/21df77fa85.js" crossorigin="anonymous"></script>
@@ -435,8 +436,8 @@
                                 <input class="short-input" type="text" id="txtEmployeeTaxCode" />
                                 <div class="short-row-item ml-8p">
                                     <label for="txtSalary" class="right-label">Mức lương</label>
-                                    <input class="medium-input" type="text" id="txtSalary" />
-                                    <i class="currency">(VNĐ)</i>
+                                    <input class="medium-input" type="text" id="txtSalary" style="text-align: right; padding-right: 45px;"/>
+                                    <i class="currency" style="font-family: 'Times New Roman', Times, serif;">(VNĐ)</i>
                                 </div>
                             </div>
                         </div>
@@ -466,16 +467,45 @@
             <div class="dialog-footer">
                 <div class="footer-right">
                     <button class="btn" id="btnSave">Cất</button>
-                    <button class="btn" id="btnSaveAdd" disabled>Cất & Thêm</button>
-                    <button class="btn" id="btnClose">Đóng</button>
+                    <button class="btn" id="btnSaveAdd">Cất & Thêm</button>
+                    <button class="btn" id="btnClose">Huỷ bỏ</button>
                 </div>
                 <div class="footer-left">
-                    <button class="btn" id="btnHelp" disabled>Giúp</button>
+                    <button class="btn" id="btnHelp">Giúp</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Form thông báo validate -->
+    <div id="formValidate" class="form-dialog" style="display:none">
+        <div class="dialog-modal"></div>
+        <div class="dialog-validate">
+            <div class="dialog-titlebar">
+                <div class="title">CUCCUK - Quản lý nhà hàng</div>
+                <div id="btnCloseHeaderValidate" class="btn-close">&times;</div>
+            </div>
+            <div class="dialog-body">
+                <div class="row">
+                    <div class="w-100">
+                        <div class="row-item">
+                            <img src="" alt="">
+                            <div id="validateText"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="dialog-footer">
+                <div class="footer-right">
+                    <button class="btn" id="btnCloseValidate">Đồng ý</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Dialog xác nhận có xoá một nhân viên hay không -->
     <div id="warning-box">
         <div class="warning-modal"></div>
         <div class="warning">
@@ -486,7 +516,8 @@
                 <div class="content-warning">
                     <div class="icon">
                     </div>
-                    <h2 class="content">Bạn có chắc chắn muốn xóa ?</h2>
+                    <div>Bạn có muốn xoá nhân viên 	&lt;	&lt;<span class="content" id ="warning-text"></span>	&gt;	&gt; không?</div>
+                    
                 </div>
                 <div class="button-group">
                     <button id="btn-yes-warning">Có</button>

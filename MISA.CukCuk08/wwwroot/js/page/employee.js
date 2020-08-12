@@ -127,9 +127,11 @@ class EmployeeJS {
      * CreatedBy: LTTUAN(12/08/2020)
      */
     checkEmployeeCode(employeeCode) {
+        debugger
         $.ajax({
             url: "/api/v1/Employees/CheckEmployeeCode/" + employeeCode,
             method: "GET",
+            async: false,
             contentType: "application/json",
         }).done(function (res) {
             return res
@@ -190,6 +192,7 @@ class EmployeeJS {
 
                 // trường hợp nhân bản thông tin nhân viên
                 case Enum.FormMode.Duplicate:
+                    this.FormMode = Enum.FormMode.Duplicate;
                     this.btnDuplicateOnClick();
                     break;
 
@@ -238,55 +241,93 @@ class EmployeeJS {
             //lấy thông tin đối tượng nhân viên
             var rowSelected = $(".row-selected");
             var employeeId = rowSelected.data("employeeId");
-            if (rowSelected) {
-                //lấy dữ liệu từ api
-                $.ajax({
-                    url: "/api/v1/Employees/" + employeeId,
-                    method: "GET",
-                    data: {},
-                    dataType: "json",
-                    contentType: "application/json",
-                }).done(function (res) {
-                    // Khởi tạo mảng lưu trữ
-                    var employeeDulicate = {
-                        employeeCode: res.employeeCode,
-                        employeeName: res.employeeName,
-                        birthday: res.birthday,
-                        phoneNumber: res.phoneNumber,
-                        email: res.email,
-                        debitNumber: res.debitNumber,
-                        gender: res.gender,
-                        idCard: res.idCard,
-                        givenDate: res.givenDate,
-                        givenPlace: res.givenPlace,
-                        position: res.position,
-                        department: res.department,
-                        salary: res.salary,
-                        startDate: res.startDate,
-                        status: res.status,
-                        //employeeAvatar: "asset\\images\\avatardefault.png"
-                    };
-                    console.log(res),
-                        $.ajax({
-                            url: "/api/v1/Employees",
-                            method: "POST",
-                            data: JSON.stringify(employeeDulicate),
-                            dataType: "json",
-                            contentType: "application/json",
-                        }).done(function (res) {
-                            debugger
-                            alert(Resource.Language[me.lang].Duplicate);
-                            me.loadData();
-                        }).fail(function (res) {
-                            alert(Resource.Language[me.lang].CantDuplicate);
-                        })
-                }).fail(function (res) {
-                    alert(Resource.Language[me.lang].CantDuplicate);
-                })
+            // if (rowSelected) {
+            //     //lấy dữ liệu từ api
+            //     $.ajax({
+            //         url: "/api/v1/Employees/" + employeeId,
+            //         method: "GET",
+            //         data: {},
+            //         dataType: "json",
+            //         contentType: "application/json",
+            //     }).done(function (res) {
+            //         // Khởi tạo mảng lưu trữ
+            //         var employeeDulicate = {
+            //             employeeCode: res.employeeCode,
+            //             employeeName: res.employeeName,
+            //             birthday: res.birthday,
+            //             phoneNumber: res.phoneNumber,
+            //             email: res.email,
+            //             debitNumber: res.debitNumber,
+            //             gender: res.gender,
+            //             idCard: res.idCard,
+            //             givenDate: res.givenDate,
+            //             givenPlace: res.givenPlace,
+            //             position: res.position,
+            //             department: res.department,
+            //             salary: res.salary,
+            //             startDate: res.startDate,
+            //             status: res.status,
+            //             //employeeAvatar: "asset\\images\\avatardefault.png"
+            //         };
+            //         console.log(res),
+            //             $.ajax({
+            //                 url: "/api/v1/Employees",
+            //                 method: "POST",
+            //                 data: JSON.stringify(employeeDulicate),
+            //                 dataType: "json",
+            //                 contentType: "application/json",
+            //             }).done(function (res) {
+            //                 debugger
+            //                 alert(Resource.Language[me.lang].Duplicate);
+            //                 me.loadData();
+            //             }).fail(function (res) {
+            //                 alert(Resource.Language[me.lang].CantDuplicate);
+            //             })
+            //     }).fail(function (res) {
+            //         alert(Resource.Language[me.lang].CantDuplicate);
+            //     })
 
-            } else {
-                alert(Resource.Language[me.lang].CantDuplicate);
-            }
+            // } else {
+            //     alert(Resource.Language[me.lang].CantDuplicate);
+            // }
+
+            //lấy dữ liệu từ api
+            $.ajax({
+                url: "/api/v1/Employees/" + employeeId,
+                method: "GET",
+                data: {},
+                dataType: "json",
+                contentType: "application/json",
+            }).done(function (res) {
+                $.each(res, function (index, item) {
+                    //bind dữ liệu vào dialog
+                    $('#txtEmployeeCode').val(commonJS.formatCode(maxEmployeeCode));
+                    // $('#txtEmployeeCode').val(res.employeeCode);
+                    $('#txtEmployeeName').val(res.employeeName);
+                    $('#dtBirthday').val(commonJS.formatDateToBind(new Date(res.birthday)));
+                    $('#txtPhoneNumber').val(res.phoneNumber);
+                    $('#txtEmail').val(res.email);
+                    $('#selectGender').val(res.gender);
+                    $('#dtDateOfIssue').val(commonJS.formatDateToBind(new Date(res.givenDate)));
+                    $('#selectStatusJob').val(res.status);
+                    $('#txtIdentificationCard').val(res.idCard);
+                    //$('#avatar').val(res.employeeAvatar);
+                    $('#txtPlaceOfIssue').val(res.givenPlace);
+                    $('#selectPosition').val(res.position);
+                    $('#selectDepartment').val(res.department);
+                    $('#txtEmployeeTaxCode').val(res.debitNumber);
+                    $('#dtJoinDate').val(commonJS.formatDateToBind(new Date(res.createdDate)));
+                    $('#txtSalary').val(commonJS.formatMoney(res['salary']));
+
+                    //Show dialog
+                    $("#formDialogDetail").show();
+                    // Focus vào ô input đầu tiên của dialog
+                    $('#txtEmployeeCode').focus();
+                });
+            }).fail(function (res) {
+            })
+
+
         } catch (e) {
             console.log(e)
         }
@@ -301,7 +342,6 @@ class EmployeeJS {
         console.log("EmployeeJS -> btnAddOnClick -> btnEditOnClick")
 
         try {
-
             if ($('.row-selected').length !== 0) {
                 //lấy thông tin đối tượng nhân viên
                 var rowSelected = $(".row-selected");
@@ -520,7 +560,7 @@ class EmployeeJS {
     saveData() {
         console.log("EmployeeJS -> saveData -> saveData");
         console.log("EmployeeJS -> saveData -> FormMode ", me.FormMode);
-
+        debugger
 
         try {
             //Khởi tạo các biến 
@@ -592,7 +632,7 @@ class EmployeeJS {
                 // alert("Trường email đã nhập không hợp lệ!");
                 me.showFormValidate("EmailRegex");
                 return false;
-            } else if (!me.checkEmployeeCode(employeeCode)) {
+            } else if (me.checkEmployeeCode(employeeCode)) {
                 me.showFormValidate("ExistEmployeeCode");
                 return false;
             } else {
@@ -641,6 +681,7 @@ class EmployeeJS {
 
 
                 } else if (me.FormMode == Enum.FormMode.Edit) {
+                    debugger
                     //Nếu form là chỉnh sửa
                     var rowSelected = $(".row-selected");
                     var employeeId = rowSelected.data("employeeId")
@@ -682,9 +723,51 @@ class EmployeeJS {
                         me.resetDialog();
 
                     }).fail(function (res) {
-
                         alert("có lỗi khi sửa");;
                     });
+                } else if (me.FormMode == Enum.FormMode.Duplicate) {
+                    var rowSelected = $(".row-selected");
+                    var employeeId = rowSelected.data("employeeId")
+                    var employeeDuplicate = {
+                        employeeId: employeeId,
+                        employeeCode: employeeCode,
+                        employeeName: employeeName,
+                        birthday: birthday,
+                        phoneNumber: phoneNumber,
+                        email: email,
+                        debitNumber: debitNumber,
+                        gender: gender,
+                        idCard: idCard,
+                        givenDate: givenDate,
+                        givenPlace: givenPlace,
+                        position: position,
+                        department: department,
+                        salary: salary,
+                        startDate: startDate,
+                        status: status,
+                        //employeeAvatar: "asset\\images\\avatardefault.png"
+                    };
+
+                    $.ajax({
+                        url: "/api/v1/Employees/",
+                        method: "POST",
+                        data: JSON.stringify(employeeDuplicate),
+                        dataType: "json",
+                        contentType: "application/json",
+                    }).done(function (res) {
+                        //Hiển thị thông báo sửa thành công
+                        alert(Resource.Language[me.lang].Edit);;
+                        console.log(res);
+                        // Đóng/ ẩn Form:
+                        $("#formDialogDetail").hide();
+                        // load lại dữ liệu
+                        me.loadData();
+                        // Reset lại dialog
+                        me.resetDialog();
+
+                    }).fail(function (res) {
+                        alert("có lỗi khi sửa");;
+                    })
                 }
             }
 
@@ -722,6 +805,7 @@ class EmployeeJS {
      */
     showFormValidate(sender) {
         $("#formValidate").show();
+        // Truyền thông báo vào form
         $("#validateText").text(Resource.Language[me.lang].Validate[sender])
     }
 
@@ -851,6 +935,7 @@ class EmployeeJS {
                                     <td style="text-align:right;">`+ commonJS.formatMoney(item['salary']) + `</td>
                                     <td>`+ item['status'] + `</td>
                                 </tr>`);
+                    // Lưu các giá trị có thể sử dụng lại
                     employeeInfoHTML.data("idCard", item.idCard);
                     employeeInfoHTML.data("givenDate", item.givenDate);
                     employeeInfoHTML.data("givenPlace", item.givenPlace);
@@ -860,6 +945,7 @@ class EmployeeJS {
                     employeeInfoHTML.data("employeeId", item.employeeId);
                     employeeInfoHTML.data("employeeName", item.employeeName);
 
+                    // Thêm đối tượng vào bảng
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
 
                     // Cập nhật lại padding

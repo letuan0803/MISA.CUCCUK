@@ -15,6 +15,7 @@ namespace MISA.CukCuk.Controllers
     {
         private readonly EmployeedbContext _context;
 
+     
         public EmployeesController(EmployeedbContext context)
         {
             _context = context;
@@ -28,7 +29,16 @@ namespace MISA.CukCuk.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
-            return await _context.Employee.OrderBy(s => s.EmployeeCode).Take(200).ToListAsync();
+            try
+            {
+                return await _context.Employee.OrderBy(s => s.EmployeeCode).Take(200).ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         /// <summary>
@@ -41,14 +51,22 @@ namespace MISA.CukCuk.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(Guid id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-
-            if (employee == null)
+            try
             {
-                return NotFound();
-            }
+                var employee = await _context.Employee.FindAsync(id);
 
-            return employee;
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+
+                return employee;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -62,9 +80,17 @@ namespace MISA.CukCuk.Controllers
         [HttpGet("{currentPage}/{recordPerPage}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int currentPage, int recordPerPage)
         {
-            var employee = await _context.Employee.OrderBy(s => s.EmployeeCode).Skip(recordPerPage*(currentPage-1)).Take(recordPerPage).ToListAsync();
+            try
+            {
+                var employee = await _context.Employee.OrderBy(s => s.EmployeeCode).Skip(recordPerPage * (currentPage - 1)).Take(recordPerPage).ToListAsync();
 
-            return employee;
+                return employee;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -79,9 +105,17 @@ namespace MISA.CukCuk.Controllers
         [Route("/totalRecord")]
         public int GetTotalRecord()
         {
-            var totalRecord =  _context.Employee.Count();
+            try
+            {
+                var totalRecord = _context.Employee.Count();
 
-            return totalRecord;
+                return totalRecord;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -92,35 +126,42 @@ namespace MISA.CukCuk.Controllers
         /// <param name="employee"></param>
         /// <returns></returns>
         // PUT: api/Employees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(Guid id, Employee employee)
         {
-            if (id != employee.EmployeeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(employee).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmployeeExists(id))
+                if (id != employee.EmployeeId)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+                _context.Entry(employee).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -129,16 +170,22 @@ namespace MISA.CukCuk.Controllers
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        // POST: api/Employees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+ 
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
-            _context.Employee.Add(employee);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Employee.Add(employee);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
+                return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -151,16 +198,24 @@ namespace MISA.CukCuk.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(Guid id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-            if (employee == null)
+            try
             {
-                return NotFound();
+                var employee = await _context.Employee.FindAsync(id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Employee.Remove(employee);
+                await _context.SaveChangesAsync();
+
+                return employee;
             }
+            catch (Exception)
+            {
 
-            _context.Employee.Remove(employee);
-            await _context.SaveChangesAsync();
-
-            return employee;
+                throw;
+            }
         }
 
         /// <summary>
@@ -171,7 +226,15 @@ namespace MISA.CukCuk.Controllers
         /// <returns></returns>
         private bool EmployeeExists(Guid id)
         {
-            return _context.Employee.Any(e => e.EmployeeId == id);
+            try
+            {
+                return _context.Employee.Any(e => e.EmployeeId == id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -183,7 +246,15 @@ namespace MISA.CukCuk.Controllers
         [HttpGet("CheckEmployeeCode/{employeeCode}")]
         public bool CheckCodeExists(string employeeCode)
         {
-            return _context.Employee.Any(e => e.EmployeeCode == employeeCode);
+            try
+            {
+                return _context.Employee.Any(e => e.EmployeeCode == employeeCode);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

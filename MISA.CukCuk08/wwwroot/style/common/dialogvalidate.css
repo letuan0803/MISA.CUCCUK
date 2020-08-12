@@ -130,7 +130,7 @@ select:focus {
 }
 
 .dialog-body .row-item .short-input {
-  width: 160px;
+  width: 150px;
 }
 
 .dialog-body .row-item .medium-input {
@@ -143,12 +143,10 @@ select:focus {
   width: 100%;
 }
 
-
 .dialog-body .input-file:hover {
   color: white;
   background-color: #0072bc;
 }
-
 
 .w-25 {
   width: 25%;
@@ -194,7 +192,18 @@ select:focus {
   right: 9px;
 }
 
-#validateText{
+#validateText {
   margin-top: 10px;
   margin-left: 30px;
+}
+
+#validateicon {
+  width: 30px;
+  height: 30px;
+  margin-left: 17px;
+}
+
+#validateicon img {
+  width: 100%;
+  height: 100%;
 }

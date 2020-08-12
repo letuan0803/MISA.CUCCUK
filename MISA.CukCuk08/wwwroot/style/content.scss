@@ -138,6 +138,12 @@ $boder-color: rgb(173, 172, 172);
 
             div {
               display: flex;
+              height: 30px;
+
+              align-items: center;
+              justify-content: center;
+              font-size: 16px;
+              font-weight: 600px;
             }
             input {
               width: 100%;
@@ -166,6 +172,8 @@ $boder-color: rgb(173, 172, 172);
           td {
             padding: 2px 4px;
             border: 1px solid #ccc;
+            overflow: hidden;
+            height: 40px;
           }
         }
         tr:hover {

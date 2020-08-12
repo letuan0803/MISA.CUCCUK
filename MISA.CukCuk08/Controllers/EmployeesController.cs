@@ -173,5 +173,17 @@ namespace MISA.CukCuk.Controllers
         {
             return _context.Employee.Any(e => e.EmployeeId == id);
         }
+
+        /// <summary>
+        /// hàm kiểm tra có trùng lặp mã nhân viên hay không
+        /// createdby: LTTUAN (10/08/2020)
+        /// </summary>
+        /// <param name="employeeCode"></param>
+        /// <returns></returns>
+        [HttpGet("CheckEmployeeCode/{employeeCode}")]
+        public bool CheckCodeExists(string employeeCode)
+        {
+            return _context.Employee.Any(e => e.EmployeeCode == employeeCode);
+        }
     }
 }

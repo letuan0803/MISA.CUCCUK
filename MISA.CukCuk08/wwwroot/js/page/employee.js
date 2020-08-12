@@ -13,6 +13,8 @@ var recordPerPage = 100
 var totalPage
 // Tổng số bản ghi
 var totalRecord
+// Mã ngôn ngữ
+var lang
 
 $(document).ready(function () {
     //load dữ liệu
@@ -27,6 +29,7 @@ class EmployeeJS {
         me = this;
         this.loadData();
         this.initEvent();
+        this.updateLang();
         this.FormMode = null;
     }
 
@@ -114,6 +117,32 @@ class EmployeeJS {
                 me.btnCloseHeaderOnClick()
             };
         });
+        // Sự kiện khi thay đổi ngôn ngữ
+        $("#lang").on("change", this.updateLang);
+
+    }
+
+    /**
+     * Hàm kiểm tra một mã nhân viên có tồn tại hay không
+     * CreatedBy: LTTUAN(12/08/2020)
+     */
+    checkEmployeeCode(employeeCode) {
+        $.ajax({
+            url: "/api/v1/Employees/CheckEmployeeCode/" + employeeCode,
+            method: "GET",
+            contentType: "application/json",
+        }).done(function (res) {
+            return res
+        }).fail(function (res) {
+        })
+    }
+
+    /**
+     * Hàm cập nhật ngôn ngữ
+     * CreatedBy: LTTUAN(12/08/2020)
+     */
+    updateLang() {
+        me.lang = $("#lang").val();
     }
 
 
@@ -219,7 +248,7 @@ class EmployeeJS {
                     contentType: "application/json",
                 }).done(function (res) {
                     // Khởi tạo mảng lưu trữ
-                    var employeeDupicate = {
+                    var employeeDulicate = {
                         employeeCode: res.employeeCode,
                         employeeName: res.employeeName,
                         birthday: res.birthday,
@@ -241,21 +270,22 @@ class EmployeeJS {
                         $.ajax({
                             url: "/api/v1/Employees",
                             method: "POST",
-                            data: JSON.stringify(employeeDupicate),
+                            data: JSON.stringify(employeeDulicate),
                             dataType: "json",
                             contentType: "application/json",
                         }).done(function (res) {
-                            alert("Nhân bản thành công");
+                            debugger
+                            alert(Resource.Language[me.lang].Duplicate);
                             me.loadData();
                         }).fail(function (res) {
-                            alert("Nhân bản không thành công 1")
+                            alert(Resource.Language[me.lang].CantDuplicate);
                         })
                 }).fail(function (res) {
-                    alert("Bạn chưa chọn nhân viên để nhân bản")
+                    alert(Resource.Language[me.lang].CantDuplicate);
                 })
 
             } else {
-                alert("Bạn chưa chọn nhân viên để nhân bản")
+                alert(Resource.Language[me.lang].CantDuplicate);
             }
         } catch (e) {
             console.log(e)
@@ -313,7 +343,7 @@ class EmployeeJS {
                 })
 
             } else {
-                alert(Resource.Language[commonJS.LanguageCode].CantEdit);
+                alert(Resource.Language[me.lang].CantEdit);
             }
         } catch (e) {
             console.log(e)
@@ -378,11 +408,11 @@ class EmployeeJS {
                 });
 
                 //thông báo xóa thành công
-                alert(Resource.Language[commonJS.LanguageCode].Delete);
+                alert(Resource.Language[me.lang].Delete);
             } else {
 
                 //thông báo xóa không thành công
-                alert(Resource.Language[commonJS.LanguageCode].CantDelete);
+                alert(Resource.Language[me.lang].CantDelete);
             }
 
         } catch (e) {
@@ -562,6 +592,9 @@ class EmployeeJS {
                 // alert("Trường email đã nhập không hợp lệ!");
                 me.showFormValidate("EmailRegex");
                 return false;
+            } else if (!me.checkEmployeeCode(employeeCode)) {
+                me.showFormValidate("ExistEmployeeCode");
+                return false;
             } else {
 
                 if (me.FormMode == Enum.FormMode.Add) {
@@ -594,7 +627,7 @@ class EmployeeJS {
                         contentType: "application/json",
                     }).done(function (res) {
                         //Hiển thị thông báo sửa thành công
-                        alert(Resource.Language[commonJS.LanguageCode].AddNew);;
+                        alert(Resource.Language[me.lang].AddNew);;
                         console.log(res);
                         // Đóng/ ẩn Form:
                         $("#formDialogDetail").hide();
@@ -639,7 +672,7 @@ class EmployeeJS {
                         contentType: "application/json",
                     }).done(function (res) {
                         //Hiển thị thông báo sửa thành công
-                        alert(Resource.Language[commonJS.LanguageCode].Edit);;
+                        alert(Resource.Language[me.lang].Edit);;
                         console.log(res);
                         // Đóng/ ẩn Form:
                         $("#formDialogDetail").hide();
@@ -689,7 +722,7 @@ class EmployeeJS {
      */
     showFormValidate(sender) {
         $("#formValidate").show();
-        $("#validateText").text(Resource.Language[commonJS.LanguageCode].Validate[sender])
+        $("#validateText").text(Resource.Language[me.lang].Validate[sender])
     }
 
     /**
@@ -753,7 +786,7 @@ class EmployeeJS {
         // Hide dialog
         $("#formValidate").hide();
         // Reset lại dialog  chuẩn bị cho lần nhập sau
-        this.resetDialog();
+        // this.resetDialog();
     }
 
     /**

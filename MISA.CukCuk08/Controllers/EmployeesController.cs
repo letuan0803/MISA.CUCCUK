@@ -28,7 +28,7 @@ namespace MISA.CukCuk.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
-            return await _context.Employee.Take(20).ToListAsync();
+            return await _context.Employee.OrderBy(s => s.EmployeeCode).Take(200).ToListAsync();
         }
 
         /// <summary>

@@ -829,6 +829,10 @@ class EmployeeJS {
 
                     $('#tbListEmployee tbody').append(employeeInfoHTML);
 
+                    // Cập nhật lại padding
+                    me.updatePadding();
+                    // Vô hiệu hoá các phím nhân bản, sửa, xoá
+                    $("#btnDuplicate, #btnEdit, #btnDelete").prop('disabled', true);
                 }
             });
             //thêm vào table
